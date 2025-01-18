@@ -1,0 +1,62 @@
+`timescale 1ns / 1ps
+
+module EncryptionEngine_tb;
+
+    // Testbench signals
+    reg          tb_clk;
+    reg          tb_rst;
+    reg  [127:0] tb_key;
+    reg  [7:0]   tb_data_in;
+    reg          tb_start;
+    wire [7:0]   tb_data_out;
+    wire         tb_done;
+
+    // Instantiate the EncryptionEngine module
+    EncryptionEngine uut (
+        .i_clk(tb_clk),
+        .i_rst(tb_rst),
+        .i_key(tb_key),
+        .i_data_in(tb_data_in),
+        .i_start(tb_start),
+        .o_data_out(tb_data_out),
+        .o_done(tb_done)
+    );
+
+    // Clock generation (50 MHz, 20 ns period)
+    always #10 tb_clk = ~tb_clk;
+
+    // Test sequence
+    initial begin
+        // Initialize signals
+        tb_clk     = 0;
+        tb_rst     = 0;
+        tb_key     = 128'hBACA1050523456789ABCDEF012345678; // Example 128-bit key
+        tb_data_in = 8'hAA;  // Example 8-bit data
+        tb_start   = 0;
+
+        // Apply reset
+        #15 tb_rst = 1;  // Deassert reset
+        #5 tb_rst = 0;   // Apply reset
+        #20 tb_rst = 1;  // Deassert reset
+
+        // Test case: Encryption process
+        $display("Starting Encryption Test...");
+        tb_start = 1; // Assert start signal
+        #20 tb_start = 0; // Deassert start after one cycle
+        
+        // Wait for the done signal
+        wait(tb_done);
+        $display("Encryption Done. Output Data: %h", tb_data_out);
+        
+        // Verify result (XOR example encryption expected)
+        if (tb_data_out === (tb_data_in ^ tb_key[7:0]))
+            $display("Test Passed!");
+        else
+            $display("Test Failed. Expected: %h, Got: %h", (tb_data_in ^ tb_key[7:0]), tb_data_out);
+
+        // Finish simulation
+        #50;
+        $stop;
+    end
+
+endmodule

@@ -26,10 +26,9 @@ module EncryptionEngine(
     input  [127:0] i_key,
     input  [7:0] i_data_in,
     input i_start,
-    output [7:0] o_data_out,
-    output o_done
+    output reg [7:0] o_data_out,
+    output reg o_done
     );
-    
 
     /*  
         Encryption Engine Finite State Machine
@@ -40,64 +39,70 @@ module EncryptionEngine(
             Done: Encryption Complete, equivalent of Rd_En = 1 of a FIFO
     */
 
-    typedef enum logic [1:0] {
-        IDLE = 2'b00,
-        ENCRYPT = 2'b01,
-        DONE = 2'b10
-    } state_t;
+
+    // Encryption Engine Finite State Machine
+    localparam IDLE     = 2'b00;
+    localparam ENCRYPT  = 2'b01;
+    localparam DONE     = 2'b10;
 
     // FSM state
-    state_t current_state, next_state;
+    reg [1:0] r_current_state, r_next_state;
 
     // Registers for holding the 128-bit key and temporary data holding register
     reg [127:0] key_register;
     reg [7:0] data_register;
-    
-    
-    // State Machine Logic, using 1 always block (as seen in R8's 'The State Machine')
-    // with Sequential Logic instead of Combinatorial to avoid latches :)
+
+    // State Machine Logic (Sequential Block)
     always @(posedge i_clk or negedge i_rst) begin
-
         if (!i_rst) begin
-
-            current_state   <= IDLE;
-            key_register    <= 128'b0;
-            data_register   <= 8'b0;
-            o_data_out      <= 8'b0;
-            o_done          <= 1'b0;
-
+            r_current_state   <= IDLE;
+            key_register      <= 128'b0;
+            data_register     <= 8'b0;
+            o_data_out        <= 8'b0;
+            o_done            <= 1'b0;
         end else begin
+            r_current_state <= r_next_state;
 
-            current_state <= next_state;
-
-            // Now we'll load input data and key for when the encryption process starts
-            if (current_state == IDLE && i_start) begin
-
+            // Load input data and key for encryption when in IDLE and start signal is asserted
+            if (r_current_state == IDLE && i_start) begin
                 key_register    <= i_key;
                 data_register   <= i_data_in;
-
             end
 
-            // We'll now output the encrypted data into the DONE state
-            if (current_state == DONE) begin
-
-                // Using a XOR cypher, can be changed to our needs!
+            // Perform encryption in DONE state
+            if (r_current_state == DONE) begin
+                // Simple XOR encryption example
                 o_data_out <= data_register ^ key_register[7:0];
-                o_done <= 1'b0;
-
+                o_done <= 1'b1;  // Assert done signal when encryption is done
             end else begin
+                o_done <= 1'b0;  // Clear done signal in other states
+            end
+        end
+    end // end of State Machine body
 
-                // Now we may clear the done signal
-                o_done <= 1'b0;
-            
-            end 
-        
+    // Next State Logic (Combinational Block)
+    always @(*) begin
+        case (r_current_state)
+            IDLE: begin
+                if (i_start)
+                    r_next_state = ENCRYPT;
+                else
+                    r_next_state = IDLE;
+            end
 
-        end // end of State Machine body
+            ENCRYPT: begin
+                r_next_state = DONE;
+            end
 
+            DONE: begin
+                // Stay in DONE state until i_start is deasserted
+                if (!i_start)
+                    r_next_state = IDLE;
+                else
+                    r_next_state = DONE;
+            end
 
-    end // end of always block
-
-
-    
+            default: r_next_state = IDLE;
+        endcase
+    end // end of Next State Logic
 endmodule
