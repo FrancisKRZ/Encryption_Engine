@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/synth_1/EncryptionEngine.tcl"
+  variable script "/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/synth_1/EncryptionEngineTop.tcl"
   variable category "vivado_synth"
 }
 
@@ -63,8 +63,10 @@ create_project -in_memory -part xc7a35tcpg236-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
+set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.cache/wt [current_project]
 set_property parent.project_path /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.xpr [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part_repo_paths {/home/kryozek/.Xilinx/Vivado/2024.1/xhub/board_store/xilinx_board_store} [current_project]
@@ -73,7 +75,18 @@ set_property ip_output_repo /home/kryozek/Shrine/FPGA/Encryption_Engine/Encrypti
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v
+read_verilog -library xil_defaultlib {
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/hdl/FIFO_wrapper.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v
+}
+add_files /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/bd/FIFO/FIFO.bd
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_fifo_generator_0_0_3/FIFO_fifo_generator_0_0.xdc]
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_fifo_generator_0_0_3/FIFO_fifo_generator_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1_board.xdc]
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1.xdc]
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/FIFO_ooc.xdc]
+
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -86,13 +99,15 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc /home/kryozek/Vivado/Vivado/2024.1/platforms/Basys-3-Master.xdc
 set_property used_in_implementation false [get_files /home/kryozek/Vivado/Vivado/2024.1/platforms/Basys-3-Master.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top EncryptionEngine -part xc7a35tcpg236-1
+synth_design -top EncryptionEngineTop -part xc7a35tcpg236-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -102,10 +117,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef EncryptionEngine.dcp
+write_checkpoint -force -noxdef EncryptionEngineTop.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file EncryptionEngine_utilization_synth.rpt -pb EncryptionEngine_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file EncryptionEngineTop_utilization_synth.rpt -pb EncryptionEngineTop_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

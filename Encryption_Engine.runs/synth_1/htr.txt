@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log EncryptionEngine.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source EncryptionEngine.tcl
+vivado -log EncryptionEngineTop.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source EncryptionEngineTop.tcl

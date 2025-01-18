@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1737234207" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/EncryptionEngine.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="EncryptionEngine_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="EncryptionEngine.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="EncryptionEngine_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="EncryptionEngine_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="EncryptionEngine_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="EncryptionEngine.vds"/>
-  <File Type="REPORTS-TCL" Name="EncryptionEngine_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="EncryptionEngine_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="EncryptionEngine.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1737237506" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/EncryptionEngine.dcp">
+  <File Type="VDS-TIMINGSUMMARY" Name="EncryptionEngineTop_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="EncryptionEngineTop.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="EncryptionEngineTop_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="EncryptionEngineTop_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="EncryptionEngineTop_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="EncryptionEngineTop.vds"/>
+  <File Type="REPORTS-TCL" Name="EncryptionEngineTop_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="EncryptionEngineTop_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="EncryptionEngineTop.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PSRCDIR/sources_1/new/EncryptionEngine.v">
+    <File Path="$PSRCDIR/sources_1/bd/FIFO/FIFO.bd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PGENDIR/sources_1/bd/FIFO/hdl/FIFO_wrapper.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -19,6 +26,13 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/EncryptionEngineTop.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/EncryptionEngine.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -50,17 +64,9 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/bd/FIFO/FIFO.bd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="EncryptionEngine"/>
+      <Option Name="TopModule" Val="EncryptionEngineTop"/>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
@@ -96,4 +102,6 @@
     </StratHandle>
     <Step Id="synth_design"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="FIFO_clk_wiz_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="FIFO_fifo_generator_0_0"/>
 </GenRun>
