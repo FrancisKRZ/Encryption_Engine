@@ -70,19 +70,37 @@ ________________________________________________________________________________
 */
 
 
-
 module EncryptionEngineTop(
-    input i_clk,
-    input i_rst,
-    input i_spi_miso,
-    output o_spi_mosi,
-    output o_spi_clk,
-    output o_spi_cs,
-    output o_w5500_rst,
-    input i_w5500_int,
-    input  [127:0] i_key,
-    output [7:0] o_encrypted_data,
-    input i_start,
-    output o_done
+    input i_clk,             // System clock
+    input i_rst,             // Reset signal
+    input i_spi_miso,        // SPI MISO (Master In Slave Out)
+    output o_spi_mosi,       // SPI MOSI (Master Out Slave In)
+    output o_spi_clk,        // SPI Clock
+    output o_spi_cs,         // SPI Chip Select
+    output o_w5500_rst,      // Reset for W5500
+    input i_w5500_int,       // Interrupt from W5500
+    input [127:0] i_key,     // 128-bit encryption key
+    output [7:0] o_encrypted_data,  // Output encrypted data
+    input i_start,           // Start signal for encryption
+    output o_done            // Done signal indicating encryption completion
     );
+
+    // FIFO IP instance
+    FIFO_wrapper fifo_inst (
+        .almost_empty_0(),      // Optional, may be used during Encryption Throttle
+        .almost_full_0(),       // Optional, may be used during Encryption Throttle
+        .din_0(din_0),          // Data input to FIFO
+        .dout_0(dout_0),        // Data output from FIFO
+        .empty_0(empty_0),      // FIFO empty flag
+        .full_0(full_0),        // FIFO full flag
+        .rd_en_0(rd_en_0),      // Read enable signal for FIFO
+        .reset(i_rst),          // Reset signal for FIFO
+        .sys_clock(i_clk),      // Clock signal for FIFO
+        .wr_en_0(wr_en_0)       // Write enable signal for FIFO
+    );
+
+    // Additional encryption logic can be added here
+    // Logic to interface with W5500, SPI, and encryption engine can be implemented
+
 endmodule
+

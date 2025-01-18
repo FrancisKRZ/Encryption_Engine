@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 01/18/2025 10:52:34 AM
-// Design Name: 
-// Module Name: EncryptionEngine
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module EncryptionEngine(
@@ -54,35 +35,44 @@ module EncryptionEngine(
 
     // State Machine Logic (Sequential Block)
     always @(posedge i_clk or negedge i_rst) begin
+        
         if (!i_rst) begin
+        
             r_current_state   <= IDLE;
             key_register      <= 128'b0;
             data_register     <= 8'b0;
             o_data_out        <= 8'b0;
             o_done            <= 1'b0;
+        
         end else begin
             r_current_state <= r_next_state;
 
-            // Load input data and key for encryption when in IDLE and start signal is asserted
+            // Loading input data and key for encryption when in IDLE and start signal is asserted
             if (r_current_state == IDLE && i_start) begin
                 key_register    <= i_key;
                 data_register   <= i_data_in;
             end
 
-            // Perform encryption in DONE state
+            // Performing encryption in DONE state
             if (r_current_state == DONE) begin
-                // Simple XOR encryption example
+                // Applying XOR on the data
                 o_data_out <= data_register ^ key_register[7:0];
                 o_done <= 1'b1;  // Assert done signal when encryption is done
+
             end else begin
                 o_done <= 1'b0;  // Clear done signal in other states
             end
+
         end
+
     end // end of State Machine body
+
 
     // Next State Logic (Combinational Block)
     always @(*) begin
+
         case (r_current_state)
+        
             IDLE: begin
                 if (i_start)
                     r_next_state = ENCRYPT;
@@ -103,6 +93,9 @@ module EncryptionEngine(
             end
 
             default: r_next_state = IDLE;
+        
         endcase
+    
     end // end of Next State Logic
+
 endmodule

@@ -35,17 +35,17 @@ module EncryptionEngine_tb;
         tb_start   = 0;
 
         // Apply reset
-        #15 tb_rst = 1;  // Deassert reset
-        #5 tb_rst = 0;   // Apply reset
-        #20 tb_rst = 1;  // Deassert reset
+        #15 tb_rst = 1;  // Deassert reset after 15 ns
+        #5 tb_rst = 0;   // Apply reset (active low)
+        #10 tb_rst = 1;  // Deassert reset
 
         // Test case: Encryption process
         $display("Starting Encryption Test...");
         tb_start = 1; // Assert start signal
-        #20 tb_start = 0; // Deassert start after one cycle
+        #20 tb_start = 0; // Deassert start after 1 cycle
         
-        // Wait for the done signal
-        wait(tb_done);
+        // Wait for the done signal to go high
+        wait(tb_done == 1);
         $display("Encryption Done. Output Data: %h", tb_data_out);
         
         // Verify result (XOR example encryption expected)

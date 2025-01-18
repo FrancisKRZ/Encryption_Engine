@@ -1,0 +1,38 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.963351",
+   "Default View_TopLeft":"-652,-655",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.7.1 2023-07-26 3bc4126617 VDI=43 GEI=38 GUI=JA:21.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_sys_clock -pg 1 -lvl 0 -x -150 -y -240 -defaultsOSRD
+preplace port port-id_reset -pg 1 -lvl 0 -x -150 -y -260 -defaultsOSRD
+preplace port port-id_empty_0 -pg 1 -lvl 2 -x 280 -y -430 -defaultsOSRD
+preplace port port-id_almost_empty_0 -pg 1 -lvl 2 -x 280 -y -450 -defaultsOSRD
+preplace port port-id_wr_en_0 -pg 1 -lvl 0 -x -150 -y -490 -defaultsOSRD
+preplace port port-id_full_0 -pg 1 -lvl 2 -x 280 -y -530 -defaultsOSRD
+preplace port port-id_almost_full_0 -pg 1 -lvl 2 -x 280 -y -550 -defaultsOSRD
+preplace port port-id_rd_en_0 -pg 1 -lvl 0 -x -150 -y -390 -defaultsOSRD
+preplace portBus din_0 -pg 1 -lvl 0 -x -150 -y -510 -defaultsOSRD
+preplace portBus dout_0 -pg 1 -lvl 2 -x 280 -y -410 -defaultsOSRD
+preplace inst fifo_generator_0 -pg 1 -lvl 1 -x 70 -y -460 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 70 -y -140 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 -90 -210 220
+preplace netloc sys_clock_1 1 0 1 -130J -240n
+preplace netloc reset_1 1 0 1 -120J -260n
+preplace netloc fifo_generator_0_empty 1 0 2 -100 -280 260J
+preplace netloc fifo_generator_0_almost_empty 1 0 2 -100 -640 240J
+preplace netloc wr_en_0_1 1 0 1 NJ -490
+preplace netloc din_0_1 1 0 1 NJ -510
+preplace netloc fifo_generator_0_full 1 0 2 -110 -270 250J
+preplace netloc fifo_generator_0_almost_full 1 0 2 -80 -290 220J
+preplace netloc fifo_generator_0_dout 1 0 2 -90 -630 230J
+preplace netloc rd_en_0_1 1 0 1 NJ -390
+levelinfo -pg 1 -150 70 280
+pagesize -pg 1 -db -bbox -sgen -270 -650 440 600
+"
+}
+{
+   "da_board_cnt":"12",
+   "da_clkrst_cnt":"7"
+}
