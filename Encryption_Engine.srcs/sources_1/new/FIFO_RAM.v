@@ -44,6 +44,7 @@ module FIFO_RAM #(
 
     // Write pointer and data
     always @(posedge i_clk) begin
+        
         if (!i_rst_n) begin
             wr_ptr <= 0;
         end else if (i_wr_en && !o_full) begin
@@ -54,6 +55,7 @@ module FIFO_RAM #(
 
     // Read pointer and data
     always @(posedge i_clk) begin
+        
         if (!i_rst_n) begin
             rd_ptr <= 0;
             o_rd_data <= 0;
@@ -65,6 +67,7 @@ module FIFO_RAM #(
 
     // Count tracking
     always @(posedge i_clk) begin
+
         if (!i_rst_n) begin
             count <= 0;
         end else begin

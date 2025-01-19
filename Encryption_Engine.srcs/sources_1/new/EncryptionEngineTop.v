@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Engineer: Penguin
+// Engineer: 🐧
 // 
 // Create Date: 01/18/2025 10:52:34 AM
 // Design Name: CMEC
@@ -71,25 +71,25 @@ module EncryptionEngineTop #(
     parameter DATA_WIDTH = 8,
     parameter DEPTH = 256
 )(
-    input i_clk,                       // System clock
-    input i_rst,                       // Reset signal
-    input i_spi_miso,                  // SPI MISO (Master In Slave Out)
-    output o_spi_mosi,                 // SPI MOSI (Master Out Slave In)
-    output o_spi_clk,                  // SPI Clock
-    output o_spi_cs,                   // SPI Chip Select
-    output o_w5500_rst,                // Reset for W5500
-    input i_w5500_int,                 // Interrupt from W5500
-    input [KEY_SIZE-1:0] i_key,        // 128-bit encryption key
-    output [DATA_WIDTH-1:0] o_encrypted_data, // Output encrypted data
-    input i_start,                     // Start signal for encryption
-    output o_done                      // Done signal indicating encryption completion
+    input i_clk,                                // System clock
+    input i_rst,                                // Reset signal
+    input i_spi_miso,                           // SPI MISO (Master In Slave Out)
+    output o_spi_mosi,                          // SPI MOSI (Master Out Slave In)
+    output o_spi_clk,                           // SPI Clock
+    output o_spi_cs,                            // SPI Chip Select
+    output o_w5500_rst,                         // Reset for W5500
+    input i_w5500_int,                          // Interrupt from W5500
+    input [KEY_SIZE-1:0] i_key,                 // 128-bit encryption key
+    output [DATA_WIDTH-1:0] o_encrypted_data,   // Output encrypted data
+    input i_start,                              // Start signal for encryption
+    output reg o_done                           // Done signal indicating encryption completion
 );
 
-    // Internal signals for SPI and FIFO
+    // Internal signals for SPI, FIFO, Encryption
     wire [DATA_WIDTH-1:0] spi_data_out;        // Data received from SPI
     wire spi_done;                             // SPI transfer complete signal
-    wire fifo_wr_en;                           // FIFO write enable
-    wire fifo_rd_en;                           // FIFO read enable
+    reg fifo_wr_en;                            // FIFO write enable
+    reg fifo_rd_en;                            // FIFO read enable
     wire fifo_empty;                           // FIFO empty flag
     wire fifo_full;                            // FIFO full flag
     wire [DATA_WIDTH-1:0] fifo_data_out;       // Data read from FIFO
@@ -97,15 +97,73 @@ module EncryptionEngineTop #(
     wire encryption_done;                      // Encryption completion signal
     wire [$clog2(DEPTH)-1:0] fifo_count;       // FIFO count
 
+
+    // Finite State Machines
+    localparam IDLE       = 3'b000;
+    localparam READ_SPI   = 3'b001;
+    localparam ENCRYPT    = 3'b010;
+    localparam WRITE_BACK = 3'b011;
+    localparam DONE       = 3'b100;
+
+    // States Alternations
+    reg [2:0] current_state, next_state;
+
+    // FSM Sequential Logic
+    always @(posedge i_clk or posedge i_rst) begin
+        if (i_rst)
+            current_state <= IDLE;
+        else
+            current_state <= next_state;
+    end
+
+    // FSM Combinational Logic
+    always @(*) begin
+        // Default assignments
+        next_state = current_state;
+        fifo_wr_en = 1'b0;
+        fifo_rd_en = 1'b0;
+        o_done = 1'b0;
+
+        case (current_state)
+            IDLE: begin
+                if (i_start)
+                    next_state = READ_SPI;
+            end
+            READ_SPI: begin
+                fifo_wr_en = spi_done;
+                // Write to FIFO when SPI transfer completes
+                if (fifo_full || spi_done)
+                    next_state = ENCRYPT;
+            end
+            ENCRYPT: begin
+                // Read FIFO when not empty
+                fifo_rd_en = !fifo_empty;
+                if (encryption_done)
+                    next_state = WRITE_BACK;
+            end
+            WRITE_BACK: begin
+                // Placeholder, e.g., send encrypted data back via SPI
+                next_state = DONE;
+            end
+            DONE: begin
+                o_done = 1'b1;
+                // Signal completion
+                if (!i_start)
+                    next_state = IDLE;
+            end
+        endcase
+    end
+
     // SPI Controller Instance
     SPIController #(
         .DATA_WIDTH(DATA_WIDTH),
-        .CPOL(0),   // Adjust as needed
-        .CPHA(0)    // Adjust as needed
+        .CPOL(0),   // Clock polarity
+        .CPHA(0)    // Clock phase  <We may do Phaseshifts for our PLL as seen in R11>
     ) spi_ctrl (
         .i_clk(i_clk),
         .i_rst(i_rst),
-        .i_data_in(8'h00),  // No data sent to SPI in this setup
+        // A humble placeholder for outgoing data
+        .i_data_in(8'h00),              
         .i_start(i_start),
         .o_data_out(spi_data_out),
         .o_done(spi_done),
@@ -113,8 +171,8 @@ module EncryptionEngineTop #(
         .i_spi_miso(i_spi_miso),
         .o_spi_clk(o_spi_clk),
         .o_spi_cs(o_spi_cs),
-        .i_clk_div(8'd4),  // SPI clock divider, parameterize if needed
-        .o_busy()          // Optional signal, leave unconnected if not needed
+        // SPI clock divider
+        .i_clk_div(8'd4)    
     );
 
     // FIFO RAM Instance
@@ -123,17 +181,20 @@ module EncryptionEngineTop #(
         .DEPTH(DEPTH)
     ) fifo_inst (
         .i_clk(i_clk),
-        .i_rst_n(!i_rst),          // Active-low reset
-        .i_wr_data(spi_data_out),  // Data received from SPI
-        .i_wr_en(spi_done),        // Write when SPI transaction is complete
-        .i_rd_en(fifo_rd_en),      // Controlled by encryption engine
-        .o_rd_data(fifo_data_out), // Data output for encryption
+        // Active-low reset
+        .i_rst_n(!i_rst),
+        // Data received from SPI          
+        .i_wr_data(spi_data_out),  
+        // Write enable controlled by FSM
+        .i_wr_en(fifo_wr_en),  
+        // Read enable controlled by FSM    
+        .i_rd_en(fifo_rd_en),      
+        // Data output for encryption
+        .o_rd_data(fifo_data_out), 
         .o_empty(fifo_empty),
         .o_full(fifo_full),
         .o_count(fifo_count)
     );
-
-    // TODO: FSM for Encryption Engine usage <IDLE / ENCRYPT / DONE>
 
     // Encryption Engine Instance
     EncryptionEngine #(
@@ -142,22 +203,25 @@ module EncryptionEngineTop #(
     ) enc_engine (
         .i_clk(i_clk),
         .i_rst(i_rst),
-        .i_key(i_key),                // Encryption key
-        .i_data_in(fifo_data_out),    // Data from FIFO
-        .i_start(!fifo_empty),        // Start encryption when data is available
+        // Encryption key
+        .i_key(i_key),          
+        // Data from FIFO      
+        .i_data_in(fifo_data_out),  
+        // Start encryption when data is available  
+        .i_start(fifo_rd_en),         
         .o_data_out(encrypted_data_out),
         .o_done(encryption_done)
     );
 
     // Assign encrypted data and done signal
     assign o_encrypted_data = encrypted_data_out;
-    assign o_done = encryption_done;
+//    assign o_done = encryption_done;
 
-    // FIFO read enable
-    assign fifo_rd_en = (!fifo_empty && encryption_done);  // Ensure FIFO is not empty
+    // FIFO read enable and ensures FIFO is not empty
+//    assign fifo_rd_en = (!fifo_empty && encryption_done); 
 
     // Future W5500 integration placeholder
-    assign o_w5500_rst = i_rst;  // Adjust as per the W5500 reset requirements
+    assign o_w5500_rst = i_rst;  // Adjust as per the W5500 module reset requirements in specs
 
 
 

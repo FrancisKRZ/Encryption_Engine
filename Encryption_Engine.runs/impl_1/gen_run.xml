@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1737308328">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1737315959">
   <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
   <File Type="POSTROUTE-PHYSOPT-RQS" Name="EncryptionEngineTop_postroute_physopted.rqs"/>
   <File Type="ROUTE-RQS" Name="EncryptionEngineTop_routed.rqs"/>
@@ -14,7 +14,6 @@
   <File Type="CFI_FILE" Name="EncryptionEngineTop.cfi"/>
   <File Type="RCFI_FILE" Name="EncryptionEngineTop.rcfi"/>
   <File Type="PL-PDI-FILE" Name="EncryptionEngineTop_pld.pdi"/>
-  <File Type="BOOT-PDI-FILE" Name="EncryptionEngineTop_boot.pdi"/>
   <File Type="RDI-RDI" Name="EncryptionEngineTop.vdi"/>
   <File Type="PDI-FILE" Name="EncryptionEngineTop.pdi"/>
   <File Type="BITSTR-MMI" Name="EncryptionEngineTop.mmi"/>
@@ -84,6 +83,8 @@
   <File Type="REPORTS-TCL" Name="EncryptionEngineTop_reports.tcl"/>
   <File Type="INIT-TIMING" Name="EncryptionEngineTop_timing_summary_init.rpt"/>
   <File Type="PA-TCL" Name="EncryptionEngineTop.tcl"/>
+  <File Type="BOOT-PDI-FILE" Name="EncryptionEngineTop_boot.pdi"/>
+  <File Type="PA-DCP" Name="EncryptionEngineTop.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/EncryptionEngine.v">

@@ -76,11 +76,14 @@ module SPIController #(
 
     // Clock generation
     always @(posedge i_clk or posedge i_rst) begin
+
         if (i_rst) begin
             clk_counter <= 0;
             spi_clk_internal <= CPOL;
             spi_clk_prev <= CPOL;
+
         end else if (state != IDLE) begin
+
             if (clk_counter >= i_clk_div - 1) begin
                 clk_counter <= 0;
                 spi_clk_internal <= ~spi_clk_internal;
@@ -88,9 +91,12 @@ module SPIController #(
                 clk_counter <= clk_counter + 1'b1;
             end
             spi_clk_prev <= spi_clk_internal;
+
         end else begin
+
             spi_clk_internal <= CPOL;
             spi_clk_prev <= CPOL;
+
         end
     end
 
@@ -105,6 +111,7 @@ module SPIController #(
     always @(posedge i_clk or posedge i_rst) begin
 
         if (i_rst) begin
+
             state <= IDLE;
             o_spi_cs <= 1'b1;
             o_done <= 1'b0;
@@ -143,6 +150,7 @@ module SPIController #(
                             // Sample MISO on rising edge for CPHA=0
                             rx_shift_reg <= {rx_shift_reg[DATA_WIDTH-2:0], i_spi_miso};
                             bit_counter <= bit_counter + 1;
+                            
                         end else begin
                             // Change MOSI on rising edge for CPHA=1
                             tx_shift_reg <= {tx_shift_reg[DATA_WIDTH-2:0], 1'b0};
@@ -155,6 +163,7 @@ module SPIController #(
                             // Change MOSI on falling edge for CPHA=0
                             tx_shift_reg <= {tx_shift_reg[DATA_WIDTH-2:0], 1'b0};
                             o_spi_mosi <= tx_shift_reg[DATA_WIDTH-2];
+
                         end else begin
                             // Sample MISO on falling edge for CPHA=1
                             rx_shift_reg <= {rx_shift_reg[DATA_WIDTH-2:0], i_spi_miso};

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Sun Jan 19 13:39:31 2025
+| Date             : Sun Jan 19 15:46:42 2025
 | Host             : kry-atp running 64-bit unknown
 | Command          : report_power -file EncryptionEngineTop_power_routed.rpt -pb EncryptionEngineTop_power_summary_routed.pb -rpx EncryptionEngineTop_power_routed.rpx
 | Design           : EncryptionEngineTop
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.975        |
+| Total On-Chip Power (W)  | 0.501        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.903        |
-| Device Static (W)        | 0.072        |
+| Dynamic (W)              | 0.429        |
+| Device Static (W)        | 0.071        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 80.1         |
-| Junction Temperature (C) | 29.9         |
+| Max Ambient (C)          | 82.5         |
+| Junction Temperature (C) | 27.5         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.120 |      151 |       --- |             --- |
-|   LUT as Logic |     0.092 |       49 |     20800 |            0.24 |
-|   CARRY4       |     0.014 |        2 |      8150 |            0.02 |
-|   Register     |     0.009 |       85 |     41600 |            0.20 |
+| Slice Logic    |     0.105 |      165 |       --- |             --- |
+|   LUT as Logic |     0.079 |       57 |     20800 |            0.27 |
+|   CARRY4       |     0.015 |        2 |      8150 |            0.02 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |        4 |       --- |             --- |
-| Signals        |     0.141 |      123 |       --- |             --- |
-| Block RAM      |     0.071 |      0.5 |        50 |            1.00 |
-| I/O            |     0.570 |       25 |       106 |           23.58 |
-| Static Power   |     0.072 |          |           |                 |
-| Total          |     0.975 |          |           |                 |
+|   Register     |     0.005 |       87 |     41600 |            0.21 |
+|   Others       |     0.000 |        5 |       --- |             --- |
+| Signals        |     0.135 |      132 |       --- |             --- |
+| Block RAM      |     0.039 |      0.5 |        50 |            1.00 |
+| I/O            |     0.151 |       25 |       106 |           23.58 |
+| Static Power   |     0.071 |          |           |                 |
+| Total          |     0.501 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,16 +72,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.383 |       0.372 |      0.011 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.056 |       0.043 |      0.013 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.330 |       0.320 |      0.010 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.021 |       0.009 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco18    |       1.800 |     0.250 |       0.249 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco18    |       1.800 |     0.051 |       0.050 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.005 |       0.005 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.003 |       0.003 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -139,10 +139,10 @@ Table of Contents
 +---------------------+-----------+
 | Name                | Power (W) |
 +---------------------+-----------+
-| EncryptionEngineTop |     0.903 |
-|   enc_engine        |     0.021 |
-|   fifo_inst         |     0.236 |
-|   spi_ctrl          |     0.028 |
+| EncryptionEngineTop |     0.429 |
+|   enc_engine        |     0.017 |
+|   fifo_inst         |     0.164 |
+|   spi_ctrl          |     0.032 |
 +---------------------+-----------+
 
 

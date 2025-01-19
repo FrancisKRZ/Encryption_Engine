@@ -13,3 +13,8 @@
     <Process Command="vivado" Owner="kryozek" Host="kry-atp" Pid="42455" HostCore="8" HostMemory="15720960">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="kryozek" Host="kry-atp" Pid="62176" HostCore="8" HostMemory="15720960">
+    </Process>
+</ProcessHandle>
