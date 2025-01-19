@@ -14,6 +14,10 @@ Manages data packet transmission and reception.
 Handles network initialization, such as setting IP addresses and ports.
 Exposes an easy-to-use interface for the Top Module to send and receive data.
 
+Below showcases the Unit Under Test (UUT) signal's in the waveform:
+![alt text](https://ibb.co/SVthWCS)
+
+
 3. FIFO RAM
 This module provides temporary storage for data packets.
 Buffers data between the W5500 and the encryption engine.

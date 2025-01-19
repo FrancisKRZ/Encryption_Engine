@@ -71,4 +71,10 @@ module W5500Driver_TB;
         .o_data_out(o_data_out)
     );
 
+    // Dump waveforms
+    initial begin
+        $dumpfile("W5500Driver_TB.vcd");
+        $dumpvars(0, W5500Driver_TB);
+    end
+
 endmodule
