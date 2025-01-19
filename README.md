@@ -15,7 +15,7 @@ Handles network initialization, such as setting IP addresses and ports.
 Exposes an easy-to-use interface for the Top Module to send and receive data.
 
 Below showcases the Unit Under Test (UUT) signal's in the waveform:
-![alt text](https://ibb.co/SVthWCS)
+![Alt text](https://i.ibb.co/2cvDm4J/Screenshot-From-2025-01-19-14-31-14.png)
 
 
 3. FIFO RAM
