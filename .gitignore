@@ -1,0 +1,5 @@
+# Ignore backup files
+Testbenches/Backups.txt
+
+# Ignore cache
+Encryption_Engine.cache
