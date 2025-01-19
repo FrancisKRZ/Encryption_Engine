@@ -3,3 +3,6 @@ Testbenches/Backups.txt
 
 # Ignore cache
 Encryption_Engine.cache
+
+# Ignore local vscode files
+.vscode/
