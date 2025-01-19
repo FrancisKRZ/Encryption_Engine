@@ -11,7 +11,7 @@
 
 module EncryptionEngine#(
     parameter WIDTH = 8, 
-    parameter KEY_SIZE = 128
+    parameter KEY_SIZE = 32 // changed from 128-bit
     )(
     input i_clk,
     input i_rst,

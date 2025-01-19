@@ -1,0 +1,9 @@
+0.7
+2020.2
+May 22 2024
+18:54:44
+/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.sim/sim_1/behav/xsim/glbl.v,1708598507,verilog,,,,glbl,,,,,,,,
+/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v,1737292757,verilog,,/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v,,EncryptionEngine,,,../../../../Encryption_Engine.gen/sources_1/bd/FIFO/ipshared/3242,,,,,
+/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v,1737318709,verilog,,,,EncryptionEngineTop,,,../../../../Encryption_Engine.gen/sources_1/bd/FIFO/ipshared/3242,,,,,
+/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v,1737316904,verilog,,/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v,,FIFO_RAM,,,../../../../Encryption_Engine.gen/sources_1/bd/FIFO/ipshared/3242,,,,,
+/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v,1737316888,verilog,,/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v,,SPIController,,,../../../../Encryption_Engine.gen/sources_1/bd/FIFO/ipshared/3242,,,,,

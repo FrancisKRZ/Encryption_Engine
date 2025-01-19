@@ -1,0 +1,7 @@
+Running: xsim.dir/EncryptionEngineTop_behav/xsimk -simmode gui -wdb EncryptionEngineTop_behav.wdb -simrunnum 0 -socket 53073
+Design successfully loaded
+Design Loading Memory Usage: 20060 KB (Peak: 20580 KB)
+Design Loading CPU Usage: 50 ms
+Simulation completed
+Simulation Memory Usage: 101796 KB (Peak: 159328 KB)
+Simulation CPU Usage: 60 ms

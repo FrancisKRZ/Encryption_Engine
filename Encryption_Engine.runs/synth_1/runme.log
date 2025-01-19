@@ -7,12 +7,12 @@
   **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
   **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
   **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Sun Jan 19 15:44:44 2025
+  **** Start of session at: Sun Jan 19 17:05:30 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source EncryptionEngineTop.tcl -notrace
-create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1353.789 ; gain = 5.961 ; free physical = 2043 ; free virtual = 10745
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1408.266 ; gain = 0.023 ; free physical = 1723 ; free virtual = 10112
 Command: read_checkpoint -auto_incremental -incremental /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -26,160 +26,165 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 61915
+INFO: [Synth 8-7075] Helper process launched with PID 77327
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2110.480 ; gain = 412.746 ; free physical = 893 ; free virtual = 9595
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2110.082 ; gain = 413.715 ; free physical = 584 ; free virtual = 8973
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'EncryptionEngineTop' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:69]
-INFO: [Synth 8-155] case statement is not full and has no default [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:127]
+INFO: [Synth 8-6157] synthesizing module 'EncryptionEngineTop' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:75]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:133]
 INFO: [Synth 8-6157] synthesizing module 'SPIController' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v:42]
 	Parameter DATA_WIDTH bound to: 8 - type: integer 
 	Parameter CPOL bound to: 0 - type: integer 
 	Parameter CPHA bound to: 0 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'SPIController' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v:42]
-WARNING: [Synth 8-7071] port 'o_busy' of module 'SPIController' is unconnected for instance 'spi_ctrl' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:162]
-WARNING: [Synth 8-7023] instance 'spi_ctrl' of module 'SPIController' has 12 connections declared, but only 11 given [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:162]
+WARNING: [Synth 8-7071] port 'o_busy' of module 'SPIController' is unconnected for instance 'spi_ctrl' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:168]
+WARNING: [Synth 8-7023] instance 'spi_ctrl' of module 'SPIController' has 12 connections declared, but only 11 given [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:168]
 INFO: [Synth 8-6157] synthesizing module 'FIFO_RAM' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v:16]
 	Parameter WIDTH bound to: 8 - type: integer 
 	Parameter DEPTH bound to: 256 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'FIFO_RAM' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v:16]
-WARNING: [Synth 8-689] width (8) of port connection 'o_count' does not match port width (9) of module 'FIFO_RAM' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:196]
+WARNING: [Synth 8-689] width (8) of port connection 'o_count' does not match port width (9) of module 'FIFO_RAM' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:202]
 INFO: [Synth 8-6157] synthesizing module 'EncryptionEngine' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v:12]
 	Parameter WIDTH bound to: 8 - type: integer 
-	Parameter KEY_SIZE bound to: 128 - type: integer 
+	Parameter KEY_SIZE bound to: 32 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'EncryptionEngine' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v:12]
-INFO: [Synth 8-6155] done synthesizing module 'EncryptionEngineTop' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:69]
+INFO: [Synth 8-6155] done synthesizing module 'EncryptionEngineTop' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:75]
 WARNING: [Synth 8-7129] Port i_w5500_int in module EncryptionEngineTop is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2188.449 ; gain = 490.715 ; free physical = 794 ; free virtual = 9497
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2188.051 ; gain = 491.684 ; free physical = 503 ; free virtual = 8893
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2203.293 ; gain = 505.559 ; free physical = 786 ; free virtual = 9489
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2205.863 ; gain = 509.496 ; free physical = 495 ; free virtual = 8885
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2203.293 ; gain = 505.559 ; free physical = 786 ; free virtual = 9489
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2205.863 ; gain = 509.496 ; free physical = 495 ; free virtual = 8885
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2203.293 ; gain = 0.000 ; free physical = 786 ; free virtual = 9489
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2205.863 ; gain = 0.000 ; free physical = 495 ; free virtual = 8885
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Parsing XDC File [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc]
-WARNING: [Vivado 12-584] No ports matched 'i_Clk'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:7]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:7]
+WARNING: [Vivado 12-584] No ports matched 'sw[8]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:24]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:24]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'i_Clk'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:8]
-CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports i_Clk]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:8]
-Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
-WARNING: [Vivado 12-584] No ports matched 'o_led[0]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:31]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:31]
+WARNING: [Vivado 12-584] No ports matched 'sw[9]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:25]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:25]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[1]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:32]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:32]
+WARNING: [Vivado 12-584] No ports matched 'sw[10]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:26]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:26]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[2]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:33]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:33]
+WARNING: [Vivado 12-584] No ports matched 'sw[11]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:27]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:27]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[3]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:34]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:34]
+WARNING: [Vivado 12-584] No ports matched 'sw[12]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:28]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:28]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[4]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:35]
+WARNING: [Vivado 12-584] No ports matched 'sw[13]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:29]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:29]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[14]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:30]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:30]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'o_led[0]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:35]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:35]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[5]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:36]
+WARNING: [Vivado 12-584] No ports matched 'o_led[1]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:36]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:36]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[6]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:37]
+WARNING: [Vivado 12-584] No ports matched 'o_led[2]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:37]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:37]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[7]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:38]
+WARNING: [Vivado 12-584] No ports matched 'o_led[3]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:38]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:38]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[8]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:39]
+WARNING: [Vivado 12-584] No ports matched 'o_led[4]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:39]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:39]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[9]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:40]
+WARNING: [Vivado 12-584] No ports matched 'o_led[5]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:40]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:40]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[10]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:41]
+WARNING: [Vivado 12-584] No ports matched 'o_led[6]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:41]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:41]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[11]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:42]
+WARNING: [Vivado 12-584] No ports matched 'o_led[7]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:42]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:42]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[12]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:43]
+WARNING: [Vivado 12-584] No ports matched 'o_led[8]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:43]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:43]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[13]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:44]
+WARNING: [Vivado 12-584] No ports matched 'o_led[9]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:44]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:44]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[14]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:45]
+WARNING: [Vivado 12-584] No ports matched 'o_led[10]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:45]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:45]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'o_led[15]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:46]
+WARNING: [Vivado 12-584] No ports matched 'o_led[11]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:46]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:46]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'i_btnC'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:67]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:67]
+WARNING: [Vivado 12-584] No ports matched 'o_led[12]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:47]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:47]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'btnU'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:68]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:68]
+WARNING: [Vivado 12-584] No ports matched 'o_led[13]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:48]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:48]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'i_btnL'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:69]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:69]
+WARNING: [Vivado 12-584] No ports matched 'o_led[14]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:49]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:49]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'i_btnR'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:70]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:70]
+WARNING: [Vivado 12-584] No ports matched 'o_led[15]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:50]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:50]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:71]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:71]
+WARNING: [Vivado 12-584] No ports matched 'btnU'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:74]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:74]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[0]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:75]
+WARNING: [Vivado 12-584] No ports matched 'i_btnL'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:75]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:75]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[1]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:76]
+WARNING: [Vivado 12-584] No ports matched 'i_btnR'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:76]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:76]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[2]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:77]
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:77]
 CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:77]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[3]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:78]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:78]
+WARNING: [Vivado 12-584] No ports matched 'i_spi_mosi'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:90]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:90]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[4]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:81]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:81]
+WARNING: [Vivado 12-584] No ports matched 'i_spi_clk'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:92]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:92]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA[5]'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:82]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:82]
+WARNING: [Vivado 12-584] No ports matched 'i_spi_cs'. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:93]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc:93]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
 Finished Parsing XDC File [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/EncryptionEngineTop_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/EncryptionEngineTop_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2359.074 ; gain = 0.000 ; free physical = 731 ; free virtual = 9434
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2354.613 ; gain = 0.000 ; free physical = 415 ; free virtual = 8804
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2359.074 ; gain = 0.000 ; free physical = 731 ; free virtual = 9434
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2354.613 ; gain = 0.000 ; free physical = 415 ; free virtual = 8804
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2359.074 ; gain = 661.340 ; free physical = 716 ; free virtual = 9418
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2354.613 ; gain = 658.246 ; free physical = 414 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 716 ; free virtual = 9418
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 414 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 716 ; free virtual = 9418
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 414 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'SPIController'
 INFO: [Synth 8-802] inferred FSM for state register 'r_current_state_reg' in module 'EncryptionEngine'
@@ -213,7 +218,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'r_current_state_reg' using
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'current_state_reg' using encoding 'sequential' in module 'EncryptionEngineTop'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 715 ; free virtual = 9419
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 412 ; free virtual = 8802
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -264,7 +269,7 @@ Start Cross Boundary and Area Optimization
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-7129] Port i_w5500_int in module EncryptionEngineTop is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 716 ; free virtual = 9423
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 408 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -285,34 +290,29 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 738 ; free virtual = 9446
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 408 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-5584] The signal "EncryptionEngineTop/fifo_inst/ram_reg" is implemented as distributed LUT RAM for the following reason(s): The timing constraints suggest that the chosen mapping will yield better timing results.
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 738 ; free virtual = 9446
+Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 408 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
-Block RAM: Final Mapping Report
-+--------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name         | RTL Object        | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+--------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|EncryptionEngineTop | fifo_inst/ram_reg | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
-+--------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-
+Distributed RAM: Final Mapping Report
+-------NONE-------
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-7052] The timing for the instance fifo_inst/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 738 ; free virtual = 9446
+Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 408 ; free virtual = 8803
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -330,37 +330,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -373,49 +373,50 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+---------+------+
-|      |Cell     |Count |
-+------+---------+------+
-|1     |BUFG     |     1|
-|2     |CARRY4   |     2|
-|3     |LUT1     |     4|
-|4     |LUT2     |    22|
-|5     |LUT3     |    10|
-|6     |LUT4     |     9|
-|7     |LUT5     |    12|
-|8     |LUT6     |    13|
-|9     |RAMB18E1 |     1|
-|10    |FDCE     |    59|
-|11    |FDPE     |     3|
-|12    |FDRE     |    25|
-|13    |IBUF     |    12|
-|14    |OBUF     |    13|
-+------+---------+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     2|
+|3     |LUT1   |     4|
+|4     |LUT2   |    22|
+|5     |LUT3   |    10|
+|6     |LUT4   |    15|
+|7     |LUT5   |    12|
+|8     |LUT6   |    18|
+|9     |RAM64M |    12|
+|10    |FDCE   |    59|
+|11    |FDPE   |     3|
+|12    |FDRE   |    33|
+|13    |IBUF   |    12|
+|14    |OBUF   |    13|
++------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2367.078 ; gain = 669.344 ; free physical = 749 ; free virtual = 9457
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.617 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2367.078 ; gain = 513.562 ; free physical = 749 ; free virtual = 9456
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2367.086 ; gain = 669.344 ; free physical = 749 ; free virtual = 9456
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2362.617 ; gain = 517.500 ; free physical = 410 ; free virtual = 8805
+Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2362.625 ; gain = 666.250 ; free physical = 410 ; free virtual = 8805
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2367.086 ; gain = 0.000 ; free physical = 749 ; free virtual = 9456
-INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2362.625 ; gain = 0.000 ; free physical = 772 ; free virtual = 9167
+INFO: [Netlist 29-17] Analyzing 14 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 2 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2423.105 ; gain = 0.000 ; free physical = 1073 ; free virtual = 9781
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2362.625 ; gain = 0.000 ; free physical = 815 ; free virtual = 9210
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 12 instances were transformed.
+  RAM64M => RAM64M (RAMD64E(x4)): 12 instances
 
-Synth Design complete | Checksum: 3da7e4d6
+Synth Design complete | Checksum: f786d887
 INFO: [Common 17-83] Releasing license: Synthesis
-37 Infos, 35 Warnings, 29 Critical Warnings and 0 Errors encountered.
+38 Infos, 36 Warnings, 30 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:28 . Memory (MB): peak = 2423.105 ; gain = 1062.379 ; free physical = 1073 ; free virtual = 9781
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2118.684; main = 1740.685; forked = 496.900
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3393.133; main = 2423.109; forked = 1026.051
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:29 . Memory (MB): peak = 2362.625 ; gain = 954.359 ; free physical = 815 ; free virtual = 9210
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2202.457; main = 1759.451; forked = 557.534
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3452.051; main = 2362.621; forked = 1089.430
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2447.117 ; gain = 0.000 ; free physical = 1073 ; free virtual = 9781
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2386.629 ; gain = 0.000 ; free physical = 815 ; free virtual = 9210
 INFO: [Common 17-1381] The checkpoint '/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/synth_1/EncryptionEngineTop.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file EncryptionEngineTop_utilization_synth.rpt -pb EncryptionEngineTop_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Jan 19 15:45:22 2025...
+INFO: [Common 17-206] Exiting Vivado at Sun Jan 19 17:06:08 2025...

@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../Encryption_Engine.gen/sources_1/bd/FIFO/ipshared/3242" \
+"../../../../Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v" \
+"../../../../Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v" \
+"../../../../Encryption_Engine.srcs/sources_1/new/SPIController.v" \
+"../../../../Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

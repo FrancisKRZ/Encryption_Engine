@@ -34,8 +34,14 @@
 // 
 // Dependencies: N/A
 // 
-// Revision 1.01 - ENCRYPTION ENGINE > FIFO_RAM > FIFO IP > SPI CONTROLLER > W5500 DRIVER
+// Revision 1.01 - Implementation Order: ENCRYPTION ENGINE > FIFO_RAM > FIFO IP > SPI CONTROLLER > W5500 DRIVER
 // Additional Comments:
+// 
+// How it works: FIFO is instantiated. 
+// SPI is instantiated which instantiates W5500 when required TX/RX
+// SPI tx into FIFO -> FIFO wr into EncryptionEngine
+// Encryption Engine rd into SPI -> SPI into W5500
+// W5500 handles lowest level ethernet frame packets whilst TX/RX
 //  PHYSICAL PINOUTS
 // 	MOSI -> JA1	Orange
 // 	MISO -> JA2	Brown
@@ -51,23 +57,23 @@
 ________________________________________________________________________________________
 W5500 Port Connections:
 
-	MOSI -> JA1	
- 	MISO -> JA2	
-	SCLK -> JA3	
-	CS   -> JA4
+	MOSI -> JA1	    JA[0]
+ 	MISO -> JA2	    JA[1]
+	SCLK -> JA3	    JA[2]
+	CS   -> JA4     JA[3]
 		
     VCC  -> JA5
     GND  -> JA6
 	
-	RST  -> JA7	
-	INT  -> JA8	
+	RST  -> JA7	    JA[4]
+	INT  -> JA8	    JA[5]
 	
 ________________________________________________________________________________________
 */
 
 
 module EncryptionEngineTop #(
-    parameter KEY_SIZE = 128, 
+    parameter KEY_SIZE = 32,  // Originally had 128-bit size, however Basys 3 has 16 switches, we'll use 32 bit-key (2^4) 4 switches
     parameter DATA_WIDTH = 8,
     parameter DEPTH = 256
 )(
@@ -79,7 +85,7 @@ module EncryptionEngineTop #(
     output o_spi_cs,                            // SPI Chip Select
     output o_w5500_rst,                         // Reset for W5500
     input i_w5500_int,                          // Interrupt from W5500
-    input [KEY_SIZE-1:0] i_key,                 // 128-bit encryption key
+    input [KEY_SIZE-1:0] i_key,                 // encryption key
     output [DATA_WIDTH-1:0] o_encrypted_data,   // Output encrypted data
     input i_start,                              // Start signal for encryption
     output reg o_done                           // Done signal indicating encryption completion
@@ -222,6 +228,26 @@ module EncryptionEngineTop #(
 
     // Future W5500 integration placeholder
     assign o_w5500_rst = i_rst;  // Adjust as per the W5500 module reset requirements in specs
+
+
+/*  If implemented FIFO RAM fails timing requirements, or aditional Error-Correction, ECC, encoding
+    is required, we may instantiate IP Block generated FIFO
+*/
+
+    // FIFO IP instance
+    // 8-bit width 256-bit depth 
+    // FIFO_wrapper fifo_inst (
+    //     .almost_empty_0(),      // Optional, may be used during Encryption Throttle
+    //     .almost_full_0(),       // Optional, may be used during Encryption Throttle
+    //     .din_0(din_0),          // Data input to FIFO
+    //     .dout_0(dout_0),        // Data output from FIFO
+    //     .empty_0(empty_0),      // FIFO empty flag
+    //     .full_0(full_0),        // FIFO full flag
+    //     .rd_en_0(rd_en_0),      // Read enable signal for FIFO
+    //     .reset(i_rst),          // Reset signal for FIFO
+    //     .sys_clock(i_clk),      // Clock signal for FIFO
+    //     .wr_en_0(wr_en_0)       // Write enable signal for FIFO
+    // );
 
 
 
