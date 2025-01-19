@@ -1,5 +1,6 @@
 `timescale 1ns / 1ps
 
+// Working SPI -- No need to update future me!
 
 /*
     clk         System Clock

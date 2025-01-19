@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Sat Jan 18 18:01:21 2025
+| Date         : Sun Jan 19 12:02:12 2025
 | Host         : kry-atp running 64-bit unknown
 | Command      : report_timing_summary -max_paths 10 -report_unconstrained -file EncryptionEngineTop_timing_summary_routed.rpt -pb EncryptionEngineTop_timing_summary_routed.pb -rpx EncryptionEngineTop_timing_summary_routed.rpx -warn_on_violation
 | Design       : EncryptionEngineTop
@@ -41,7 +41,11 @@ Timing Summary Report
 | ------------------
 ------------------------------------------------------------------------------------------------
 
-No report available as report_methodology has not been run prior. Run report_methodology on the current design for the summary of methodology violations.
+Rule       Severity          Description                  Violations  
+---------  ----------------  ---------------------------  ----------  
+TIMING-17  Critical Warning  Non-clocked sequential cell  87          
+
+Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
 
 
 
@@ -49,12 +53,12 @@ check_timing report
 
 Table of Contents
 -----------------
-1. checking no_clock (0)
+1. checking no_clock (87)
 2. checking constant_clock (0)
 3. checking pulse_width_clock (0)
-4. checking unconstrained_internal_endpoints (0)
-5. checking no_input_delay (0)
-6. checking no_output_delay (0)
+4. checking unconstrained_internal_endpoints (274)
+5. checking no_input_delay (11)
+6. checking no_output_delay (12)
 7. checking multiple_clock (0)
 8. checking generated_clocks (0)
 9. checking loops (0)
@@ -62,9 +66,9 @@ Table of Contents
 11. checking partial_output_delay (0)
 12. checking latch_loops (0)
 
-1. checking no_clock (0)
-------------------------
- There are 0 register/latch pins with no clock.
+1. checking no_clock (87)
+-------------------------
+ There are 87 register/latch pins with no clock driven by root clock pin: i_clk (HIGH)
 
 
 2. checking constant_clock (0)
@@ -77,23 +81,23 @@ Table of Contents
  There are 0 register/latch pins which need pulse_width check
 
 
-4. checking unconstrained_internal_endpoints (0)
-------------------------------------------------
- There are 0 pins that are not constrained for maximum delay.
+4. checking unconstrained_internal_endpoints (274)
+--------------------------------------------------
+ There are 274 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
 
-5. checking no_input_delay (0)
-------------------------------
- There are 0 input ports with no input delay specified.
+5. checking no_input_delay (11)
+-------------------------------
+ There are 11 input ports with no input delay specified. (HIGH)
 
  There are 0 input ports with no input delay but user has a false path constraint.
 
 
-6. checking no_output_delay (0)
--------------------------------
- There are 0 ports with no output delay specified.
+6. checking no_output_delay (12)
+--------------------------------
+ There are 12 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 
@@ -138,10 +142,10 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      7.817        0.000                      0                   45        0.156        0.000                      0                   45        3.000        0.000                       0                    51  
+        inf        0.000                      0                  287          inf        0.000                      0                  287           NA           NA                      NA                    NA  
 
 
-All user specified timing constraints are met.
+There are no user specified timing constraints.
 
 
 ------------------------------------------------------------------------------------------------
@@ -149,23 +153,14 @@ All user specified timing constraints are met.
 | -------------
 ------------------------------------------------------------------------------------------------
 
-Clock                      Waveform(ns)       Period(ns)      Frequency(MHz)
------                      ------------       ----------      --------------
-i_clk                      {0.000 5.000}      10.000          100.000         
-  clk_out1_FIFO_clk_wiz_1  {0.000 5.000}      10.000          100.000         
-  clkfbout_FIFO_clk_wiz_1  {0.000 5.000}      10.000          100.000         
-
 
 ------------------------------------------------------------------------------------------------
 | Intra Clock Table
 | -----------------
 ------------------------------------------------------------------------------------------------
 
-Clock                          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
------                          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-i_clk                                                                                                                                                                        3.000        0.000                       0                     1  
-  clk_out1_FIFO_clk_wiz_1        7.817        0.000                      0                   45        0.156        0.000                      0                   45        4.500        0.000                       0                    47  
-  clkfbout_FIFO_clk_wiz_1                                                                                                                                                    7.845        0.000                       0                     3  
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 
 
 ------------------------------------------------------------------------------------------------
@@ -200,9 +195,9 @@ Path Group    From Clock    To Clock
 | ------------------------
 ------------------------------------------------------------------------------------------------
 
-Path Group               From Clock               To Clock               
-----------               ----------               --------               
-(none)                   clkfbout_FIFO_clk_wiz_1                           
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+(none)                                    
 
 
 ------------------------------------------------------------------------------------------------
@@ -211,1345 +206,217 @@ Path Group               From Clock               To Clock
 ------------------------------------------------------------------------------------------------
 
 
----------------------------------------------------------------------------------------------------
-From Clock:  i_clk
-  To Clock:  i_clk
-
-Setup :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
-Hold  :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
-PW    :            0  Failing Endpoints,  Worst Slack        3.000ns,  Total Violation        0.000ns
----------------------------------------------------------------------------------------------------
-
-
-Pulse Width Checks
---------------------------------------------------------------------------------------
-Clock Name:         i_clk
-Waveform(ns):       { 0.000 5.000 }
-Period(ns):         10.000
-Sources:            { i_clk }
-
-Check Type        Corner  Lib Pin            Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location         Pin
-Min Period        n/a     MMCME2_ADV/CLKIN1  n/a            1.249         10.000      8.751      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-Max Period        n/a     MMCME2_ADV/CLKIN1  n/a            100.000       10.000      90.000     MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-Low Pulse Width   Slow    MMCME2_ADV/CLKIN1  n/a            2.000         5.000       3.000      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-Low Pulse Width   Fast    MMCME2_ADV/CLKIN1  n/a            2.000         5.000       3.000      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-High Pulse Width  Slow    MMCME2_ADV/CLKIN1  n/a            2.000         5.000       3.000      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-High Pulse Width  Fast    MMCME2_ADV/CLKIN1  n/a            2.000         5.000       3.000      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKIN1
-
-
-
----------------------------------------------------------------------------------------------------
-From Clock:  clk_out1_FIFO_clk_wiz_1
-  To Clock:  clk_out1_FIFO_clk_wiz_1
-
-Setup :            0  Failing Endpoints,  Worst Slack        7.817ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.156ns,  Total Violation        0.000ns
-PW    :            0  Failing Endpoints,  Worst Slack        4.500ns,  Total Violation        0.000ns
----------------------------------------------------------------------------------------------------
-
-
-Max Delay Paths
---------------------------------------------------------------------------------------
-Slack (MET) :             7.817ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[7]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        2.117ns  (logic 0.766ns (36.177%)  route 1.351ns (63.823%))
-  Logic Levels:           2  (LUT3=1 LUT6=1)
-  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.552ns = ( 8.448 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.954ns
-    Clock Pessimism Removal (CPR):    0.577ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.558    -0.954    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.518    -0.436 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           0.886     0.450    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X10Y31         LUT6 (Prop_lut6_I2_O)        0.124     0.574 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[7]_i_2/O
-                         net (fo=2, routed)           0.466     1.040    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[7]_i_2_n_0
-    SLICE_X11Y32         LUT3 (Prop_lut3_I0_O)        0.124     1.164 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[7]_i_1/O
-                         net (fo=1, routed)           0.000     1.164    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[7]
-    SLICE_X11Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[7]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.443     8.448    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[7]/C
-                         clock pessimism              0.577     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X11Y32         FDRE (Setup_fdre_C_D)        0.031     8.981    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[7]
-  -------------------------------------------------------------------
-                         required time                          8.981    
-                         arrival time                          -1.164    
-  -------------------------------------------------------------------
-                         slack                                  7.817    
-
-Slack (MET) :             7.819ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[6]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        2.113ns  (logic 0.766ns (36.245%)  route 1.347ns (63.755%))
-  Logic Levels:           2  (LUT2=1 LUT6=1)
-  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.552ns = ( 8.448 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.954ns
-    Clock Pessimism Removal (CPR):    0.577ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.558    -0.954    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.518    -0.436 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           0.886     0.450    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X10Y31         LUT6 (Prop_lut6_I2_O)        0.124     0.574 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[7]_i_2/O
-                         net (fo=2, routed)           0.462     1.036    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[7]_i_2_n_0
-    SLICE_X11Y32         LUT2 (Prop_lut2_I0_O)        0.124     1.160 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[6]_i_1/O
-                         net (fo=1, routed)           0.000     1.160    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[6]
-    SLICE_X11Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[6]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.443     8.448    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[6]/C
-                         clock pessimism              0.577     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X11Y32         FDRE (Setup_fdre_C_D)        0.029     8.979    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[6]
-  -------------------------------------------------------------------
-                         required time                          8.979    
-                         arrival time                          -1.160    
-  -------------------------------------------------------------------
-                         slack                                  7.819    
-
-Slack (MET) :             7.892ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[6]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        2.038ns  (logic 0.766ns (37.593%)  route 1.272ns (62.407%))
-  Logic Levels:           2  (LUT2=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.553ns = ( 8.447 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.578ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X8Y33          FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X8Y33          FDSE (Prop_fdse_C_Q)         0.518    -0.433 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/Q
-                         net (fo=8, routed)           0.728     0.295    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[1]
-    SLICE_X9Y33          LUT6 (Prop_lut6_I2_O)        0.124     0.419 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[7]_i_2/O
-                         net (fo=2, routed)           0.544     0.963    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[7]_i_2_n_0
-    SLICE_X9Y32          LUT2 (Prop_lut2_I0_O)        0.124     1.087 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[6]_i_1/O
-                         net (fo=1, routed)           0.000     1.087    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/plusOp__0[6]
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[6]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.442     8.447    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[6]/C
-                         clock pessimism              0.578     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X9Y32          FDRE (Setup_fdre_C_D)        0.029     8.979    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[6]
-  -------------------------------------------------------------------
-                         required time                          8.979    
-                         arrival time                          -1.087    
-  -------------------------------------------------------------------
-                         slack                                  7.892    
-
-Slack (MET) :             7.944ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[7]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        2.032ns  (logic 0.760ns (37.409%)  route 1.272ns (62.591%))
-  Logic Levels:           2  (LUT3=1 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.553ns = ( 8.447 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.578ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X8Y33          FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X8Y33          FDSE (Prop_fdse_C_Q)         0.518    -0.433 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/Q
-                         net (fo=8, routed)           0.728     0.295    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[1]
-    SLICE_X9Y33          LUT6 (Prop_lut6_I2_O)        0.124     0.419 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[7]_i_2/O
-                         net (fo=2, routed)           0.544     0.963    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[7]_i_2_n_0
-    SLICE_X9Y32          LUT3 (Prop_lut3_I0_O)        0.118     1.081 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[7]_i_1/O
-                         net (fo=1, routed)           0.000     1.081    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/plusOp__0[7]
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[7]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.442     8.447    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[7]/C
-                         clock pessimism              0.578     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X9Y32          FDRE (Setup_fdre_C_D)        0.075     9.025    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[7]
-  -------------------------------------------------------------------
-                         required time                          9.025    
-                         arrival time                          -1.081    
-  -------------------------------------------------------------------
-                         slack                                  7.944    
-
-Slack (MET) :             8.091ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.863ns  (logic 0.580ns (31.127%)  route 1.283ns (68.873%))
-  Logic Levels:           1  (LUT1=1)
-  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.552ns = ( 8.448 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.602ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y33          FDRE (Prop_fdre_C_Q)         0.456    -0.495 f  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/Q
-                         net (fo=9, routed)           1.283     0.789    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[0]
-    SLICE_X9Y33          LUT1 (Prop_lut1_I0_O)        0.124     0.913 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[0]_i_1/O
-                         net (fo=1, routed)           0.000     0.913    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/plusOp__0[0]
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.443     8.448    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-                         clock pessimism              0.602     9.049    
-                         clock uncertainty           -0.074     8.975    
-    SLICE_X9Y33          FDRE (Setup_fdre_C_D)        0.029     9.004    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]
-  -------------------------------------------------------------------
-                         required time                          9.004    
-                         arrival time                          -0.913    
-  -------------------------------------------------------------------
-                         slack                                  8.091    
-
-Slack (MET) :             8.109ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.891ns  (logic 0.608ns (32.147%)  route 1.283ns (67.854%))
-  Logic Levels:           1  (LUT3=1)
-  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.552ns = ( 8.448 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.602ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y33          FDRE (Prop_fdre_C_Q)         0.456    -0.495 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/Q
-                         net (fo=9, routed)           1.283     0.789    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[0]
-    SLICE_X9Y33          LUT3 (Prop_lut3_I0_O)        0.152     0.941 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[2]_i_1/O
-                         net (fo=1, routed)           0.000     0.941    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/plusOp__0[2]
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.443     8.448    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/C
-                         clock pessimism              0.602     9.049    
-                         clock uncertainty           -0.074     8.975    
-    SLICE_X9Y33          FDRE (Setup_fdre_C_D)        0.075     9.050    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]
-  -------------------------------------------------------------------
-                         required time                          9.050    
-                         arrival time                          -0.941    
-  -------------------------------------------------------------------
-                         slack                                  8.109    
-
-Slack (MET) :             8.206ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[3]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.729ns  (logic 0.642ns (37.140%)  route 1.087ns (62.860%))
-  Logic Levels:           1  (LUT4=1)
-  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.554ns = ( 8.446 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.954ns
-    Clock Pessimism Removal (CPR):    0.579ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.558    -0.954    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.518    -0.436 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           1.087     0.651    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X11Y31         LUT4 (Prop_lut4_I0_O)        0.124     0.775 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[3]_i_1/O
-                         net (fo=1, routed)           0.000     0.775    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[3]
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[3]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.441     8.446    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[3]/C
-                         clock pessimism              0.579     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X11Y31         FDRE (Setup_fdre_C_D)        0.031     8.981    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[3]
-  -------------------------------------------------------------------
-                         required time                          8.981    
-                         arrival time                          -0.775    
-  -------------------------------------------------------------------
-                         slack                                  8.206    
-
-Slack (MET) :             8.222ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[4]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.757ns  (logic 0.670ns (38.142%)  route 1.087ns (61.858%))
-  Logic Levels:           1  (LUT5=1)
-  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.554ns = ( 8.446 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.954ns
-    Clock Pessimism Removal (CPR):    0.579ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.558    -0.954    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.518    -0.436 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           1.087     0.651    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X11Y31         LUT5 (Prop_lut5_I2_O)        0.152     0.803 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[4]_i_1/O
-                         net (fo=1, routed)           0.000     0.803    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[4]
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[4]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.441     8.446    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[4]/C
-                         clock pessimism              0.579     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X11Y31         FDRE (Setup_fdre_C_D)        0.075     9.025    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[4]
-  -------------------------------------------------------------------
-                         required time                          9.025    
-                         arrival time                          -0.803    
-  -------------------------------------------------------------------
-                         slack                                  8.222    
-
-Slack (MET) :             8.257ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[1]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.535ns  (logic 0.518ns (33.749%)  route 1.017ns (66.251%))
-  Logic Levels:           0  
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.553ns = ( 8.447 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.578ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X8Y33          FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X8Y33          FDSE (Prop_fdse_C_Q)         0.518    -0.433 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/Q
-                         net (fo=8, routed)           1.017     0.584    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[1]
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[1]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.442     8.447    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[1]/C
-                         clock pessimism              0.578     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X9Y32          FDRE (Setup_fdre_C_D)       -0.109     8.841    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[1]
-  -------------------------------------------------------------------
-                         required time                          8.841    
-                         arrival time                          -0.584    
-  -------------------------------------------------------------------
-                         slack                                  8.257    
-
-Slack (MET) :             8.343ns  (required time - arrival time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[2]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            10.000ns  (clk_out1_FIFO_clk_wiz_1 rise@10.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        1.280ns  (logic 0.419ns (32.722%)  route 0.861ns (67.278%))
-  Logic Levels:           0  
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.553ns = ( 8.447 - 10.000 ) 
-    Source Clock Delay      (SCD):    -0.951ns
-    Clock Pessimism Removal (CPR):    0.578ns
-  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.071ns
-    Discrete Jitter          (DJ):    0.131ns
-    Phase Error              (PE):    0.000ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.458     1.458 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.233     2.691    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -6.961    -4.269 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.661    -2.608    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096    -2.512 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.561    -0.951    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y33          FDRE (Prop_fdre_C_Q)         0.419    -0.532 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[2]/Q
-                         net (fo=7, routed)           0.861     0.330    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[2]
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[2]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                     10.000    10.000 r  
-    W5                                                0.000    10.000 r  i_clk (IN)
-                         net (fo=0)                   0.000    10.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388    11.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162    12.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -7.217     5.332 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           1.581     6.914    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     7.005 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          1.442     8.447    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[2]/C
-                         clock pessimism              0.578     9.024    
-                         clock uncertainty           -0.074     8.950    
-    SLICE_X9Y32          FDRE (Setup_fdre_C_D)       -0.277     8.673    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[2]
-  -------------------------------------------------------------------
-                         required time                          8.673    
-                         arrival time                          -0.330    
-  -------------------------------------------------------------------
-                         slack                                  8.343    
-
-
-
-
-
-Min Delay Paths
---------------------------------------------------------------------------------------
-Slack (MET) :             0.156ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[5]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[5]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.220ns  (logic 0.164ns (74.580%)  route 0.056ns (25.420%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.000ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.863ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.240ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[5]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDRE (Prop_fdre_C_Q)         0.164    -0.458 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[5]/Q
-                         net (fo=1, routed)           0.056    -0.402    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus1[5]
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[5]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.827    -0.863    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[5]/C
-                         clock pessimism              0.240    -0.622    
-    SLICE_X10Y31         FDRE (Hold_fdre_C_D)         0.064    -0.558    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[5]
-  -------------------------------------------------------------------
-                         required time                          0.558    
-                         arrival time                          -0.402    
-  -------------------------------------------------------------------
-                         slack                                  0.156    
-
-Slack (MET) :             0.163ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/D
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.296ns  (logic 0.186ns (62.809%)  route 0.110ns (37.191%))
-  Logic Levels:           1  (LUT2=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.861ns
-    Source Clock Delay      (SCD):    -0.620ns
-    Clock Pessimism Removal (CPR):    -0.253ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.561    -0.620    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y33          FDRE (Prop_fdre_C_Q)         0.141    -0.479 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[0]/Q
-                         net (fo=9, routed)           0.110    -0.369    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[0]
-    SLICE_X8Y33          LUT2 (Prop_lut2_I0_O)        0.045    -0.324 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count[1]_i_1/O
-                         net (fo=1, routed)           0.000    -0.324    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/plusOp__0[1]
-    SLICE_X8Y33          FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.829    -0.861    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X8Y33          FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]/C
-                         clock pessimism              0.253    -0.607    
-    SLICE_X8Y33          FDSE (Hold_fdse_C_D)         0.120    -0.487    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[1]
-  -------------------------------------------------------------------
-                         required time                          0.487    
-                         arrival time                          -0.324    
-  -------------------------------------------------------------------
-                         slack                                  0.163    
-
-Slack (MET) :             0.172ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/D
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.231ns  (logic 0.164ns (70.995%)  route 0.067ns (29.005%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.000ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.860ns
-    Source Clock Delay      (SCD):    -0.619ns
-    Clock Pessimism Removal (CPR):    -0.240ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.562    -0.619    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/clk
-    SLICE_X10Y34         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y34         FDSE (Prop_fdse_C_Q)         0.164    -0.455 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/Q
-                         net (fo=4, routed)           0.067    -0.388    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i0__3
-    SLICE_X10Y34         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.830    -0.860    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/clk
-    SLICE_X10Y34         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-                         clock pessimism              0.240    -0.619    
-    SLICE_X10Y34         FDSE (Hold_fdse_C_D)         0.059    -0.560    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg
-  -------------------------------------------------------------------
-                         required time                          0.560    
-                         arrival time                          -0.388    
-  -------------------------------------------------------------------
-                         slack                                  0.172    
-
-Slack (MET) :             0.182ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.242ns  (logic 0.164ns (67.739%)  route 0.078ns (32.261%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.000ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.863ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.240ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.164    -0.458 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           0.078    -0.380    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.827    -0.863    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-                         clock pessimism              0.240    -0.622    
-    SLICE_X10Y31         FDRE (Hold_fdre_C_D)         0.060    -0.562    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]
-  -------------------------------------------------------------------
-                         required time                          0.562    
-                         arrival time                          -0.380    
-  -------------------------------------------------------------------
-                         slack                                  0.182    
-
-Slack (MET) :             0.196ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[2]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.316ns  (logic 0.212ns (67.066%)  route 0.104ns (32.934%))
-  Logic Levels:           1  (LUT3=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.863ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.253ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y31         FDSE (Prop_fdse_C_Q)         0.164    -0.458 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/Q
-                         net (fo=7, routed)           0.104    -0.354    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[1]
-    SLICE_X11Y31         LUT3 (Prop_lut3_I1_O)        0.048    -0.306 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[2]_i_1/O
-                         net (fo=1, routed)           0.000    -0.306    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[2]
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[2]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.827    -0.863    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[2]/C
-                         clock pessimism              0.253    -0.609    
-    SLICE_X11Y31         FDRE (Hold_fdre_C_D)         0.107    -0.502    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[2]
-  -------------------------------------------------------------------
-                         required time                          0.502    
-                         arrival time                          -0.306    
-  -------------------------------------------------------------------
-                         slack                                  0.196    
-
-Slack (MET) :             0.197ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/D
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.330ns  (logic 0.186ns (56.423%)  route 0.144ns (43.577%))
-  Logic Levels:           1  (LUT2=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.863ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.253ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X11Y31         FDRE (Prop_fdre_C_Q)         0.141    -0.481 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/Q
-                         net (fo=8, routed)           0.144    -0.338    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[0]
-    SLICE_X10Y31         LUT2 (Prop_lut2_I0_O)        0.045    -0.293 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[1]_i_1/O
-                         net (fo=1, routed)           0.000    -0.293    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[1]
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.827    -0.863    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]/C
-                         clock pessimism              0.253    -0.609    
-    SLICE_X10Y31         FDSE (Hold_fdse_C_D)         0.120    -0.489    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[1]
-  -------------------------------------------------------------------
-                         required time                          0.489    
-                         arrival time                          -0.293    
-  -------------------------------------------------------------------
-                         slack                                  0.197    
-
-Slack (MET) :             0.198ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[3]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[3]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.282ns  (logic 0.141ns (49.992%)  route 0.141ns (50.008%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.862ns
-    Source Clock Delay      (SCD):    -0.620ns
-    Clock Pessimism Removal (CPR):    -0.254ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.561    -0.620    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y33          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[3]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X9Y33          FDRE (Prop_fdre_C_Q)         0.141    -0.479 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_reg[3]/Q
-                         net (fo=6, routed)           0.141    -0.338    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/Q[3]
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[3]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.828    -0.862    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/clk
-    SLICE_X9Y32          FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[3]/C
-                         clock pessimism              0.254    -0.607    
-    SLICE_X9Y32          FDRE (Hold_fdre_C_D)         0.071    -0.536    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gcc0.gc1.gsym.count_d1_reg[3]
-  -------------------------------------------------------------------
-                         required time                          0.536    
-                         arrival time                          -0.338    
-  -------------------------------------------------------------------
-                         slack                                  0.198    
-
-Slack (MET) :             0.200ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[5]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.334ns  (logic 0.186ns (55.746%)  route 0.148ns (44.254%))
-  Logic Levels:           1  (LUT6=1)
-  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.863ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.253ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X11Y31         FDRE (Prop_fdre_C_Q)         0.141    -0.481 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/Q
-                         net (fo=8, routed)           0.148    -0.334    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[0]
-    SLICE_X10Y31         LUT6 (Prop_lut6_I2_O)        0.045    -0.289 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count[5]_i_1/O
-                         net (fo=1, routed)           0.000    -0.289    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/plusOp[5]
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[5]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.827    -0.863    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[5]/C
-                         clock pessimism              0.253    -0.609    
-    SLICE_X10Y31         FDRE (Hold_fdre_C_D)         0.121    -0.488    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[5]
-  -------------------------------------------------------------------
-                         required time                          0.488    
-                         arrival time                          -0.289    
-  -------------------------------------------------------------------
-                         slack                                  0.200    
-
-Slack (MET) :             0.211ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[2]/D
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.274ns  (logic 0.164ns (59.853%)  route 0.110ns (40.147%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.000ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.862ns
-    Source Clock Delay      (SCD):    -0.621ns
-    Clock Pessimism Removal (CPR):    -0.240ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.560    -0.621    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X10Y32         FDRE (Prop_fdre_C_Q)         0.164    -0.457 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/Q
-                         net (fo=1, routed)           0.110    -0.347    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus1[2]
-    SLICE_X10Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[2]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.828    -0.862    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X10Y32         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[2]/C
-                         clock pessimism              0.240    -0.621    
-    SLICE_X10Y32         FDRE (Hold_fdre_C_D)         0.063    -0.558    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d2_reg[2]
-  -------------------------------------------------------------------
-                         required time                          0.558    
-                         arrival time                          -0.347    
-  -------------------------------------------------------------------
-                         slack                                  0.211    
-
-Slack (MET) :             0.219ns  (arrival time - required time)
-  Source:                 fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-                            (rising edge-triggered cell FDRE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/D
-                            (rising edge-triggered cell FDSE clocked by clk_out1_FIFO_clk_wiz_1  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Path Group:             clk_out1_FIFO_clk_wiz_1
-  Path Type:              Hold (Min at Fast Process Corner)
-  Requirement:            0.000ns  (clk_out1_FIFO_clk_wiz_1 rise@0.000ns - clk_out1_FIFO_clk_wiz_1 rise@0.000ns)
-  Data Path Delay:        0.309ns  (logic 0.141ns (45.701%)  route 0.168ns (54.299%))
-  Logic Levels:           0  
-  Clock Path Skew:        0.015ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    -0.862ns
-    Source Clock Delay      (SCD):    -0.622ns
-    Clock Pessimism Removal (CPR):    -0.254ns
-
-    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
-  -------------------------------------------------------------------    -------------------
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.226     0.226 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.440     0.667    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -2.360    -1.693 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.486    -1.207    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026    -1.181 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.559    -0.622    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y31         FDRE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/C
-  -------------------------------------------------------------------    -------------------
-    SLICE_X11Y31         FDRE (Prop_fdre_C_Q)         0.141    -0.481 r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_reg[0]/Q
-                         net (fo=8, routed)           0.168    -0.314    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/rd_pntr_plus2[0]
-    SLICE_X11Y32         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/D
-  -------------------------------------------------------------------    -------------------
-
-                         (clock clk_out1_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     0.414 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     0.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
-                                                     -3.142    -2.248 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-                         net (fo=1, routed)           0.530    -1.718    fifo_inst/FIFO_i/clk_wiz/inst/clk_out1_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029    -1.689 r  fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/O
-                         net (fo=45, routed)          0.828    -0.862    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/clk
-    SLICE_X11Y32         FDSE                                         r  fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-                         clock pessimism              0.254    -0.607    
-    SLICE_X11Y32         FDSE (Hold_fdse_C_D)         0.075    -0.532    fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]
-  -------------------------------------------------------------------
-                         required time                          0.532    
-                         arrival time                          -0.314    
-  -------------------------------------------------------------------
-                         slack                                  0.219    
-
-
-
-
-
-Pulse Width Checks
---------------------------------------------------------------------------------------
-Clock Name:         clk_out1_FIFO_clk_wiz_1
-Waveform(ns):       { 0.000 5.000 }
-Period(ns):         10.000
-Sources:            { fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0 }
-
-Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location         Pin
-Min Period        n/a     BUFG/I              n/a            2.155         10.000      7.845      BUFGCTRL_X0Y0    fifo_inst/FIFO_i/clk_wiz/inst/clkout1_buf/I
-Min Period        n/a     MMCME2_ADV/CLKOUT0  n/a            1.249         10.000      8.751      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-Min Period        n/a     FDSE/C              n/a            1.000         10.000      9.000      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-Min Period        n/a     FDSE/C              n/a            1.000         10.000      9.000      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg/C
-Min Period        n/a     FDSE/C              n/a            1.000         10.000      9.000      SLICE_X11Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-Min Period        n/a     FDRE/C              n/a            1.000         10.000      9.000      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-Min Period        n/a     FDRE/C              n/a            1.000         10.000      9.000      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-Min Period        n/a     FDRE/C              n/a            1.000         10.000      9.000      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[3]/C
-Min Period        n/a     FDRE/C              n/a            1.000         10.000      9.000      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[4]/C
-Min Period        n/a     FDRE/C              n/a            1.000         10.000      9.000      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[5]/C
-Max Period        n/a     MMCME2_ADV/CLKOUT0  n/a            213.360       10.000      203.360    MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKOUT0
-Low Pulse Width   Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-Low Pulse Width   Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-Low Pulse Width   Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg/C
-Low Pulse Width   Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg/C
-Low Pulse Width   Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X11Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-Low Pulse Width   Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X11Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-Low Pulse Width   Slow    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-Low Pulse Width   Fast    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-Low Pulse Width   Slow    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-Low Pulse Width   Fast    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-High Pulse Width  Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-High Pulse Width  Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg/C
-High Pulse Width  Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg/C
-High Pulse Width  Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X10Y34     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg/C
-High Pulse Width  Slow    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X11Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-High Pulse Width  Fast    FDSE/C              n/a            0.500         5.000       4.500      SLICE_X11Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[0]/C
-High Pulse Width  Slow    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-High Pulse Width  Fast    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y31     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[1]/C
-High Pulse Width  Slow    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-High Pulse Width  Fast    FDRE/C              n/a            0.500         5.000       4.500      SLICE_X10Y32     fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc1.count_d1_reg[2]/C
-
-
-
----------------------------------------------------------------------------------------------------
-From Clock:  clkfbout_FIFO_clk_wiz_1
-  To Clock:  clkfbout_FIFO_clk_wiz_1
-
-Setup :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
-Hold  :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
-PW    :            0  Failing Endpoints,  Worst Slack        7.845ns,  Total Violation        0.000ns
----------------------------------------------------------------------------------------------------
-
-
-Pulse Width Checks
---------------------------------------------------------------------------------------
-Clock Name:         clkfbout_FIFO_clk_wiz_1
-Waveform(ns):       { 0.000 5.000 }
-Period(ns):         10.000
-Sources:            { fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT }
-
-Check Type  Corner  Lib Pin              Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location         Pin
-Min Period  n/a     BUFG/I               n/a            2.155         10.000      7.845      BUFGCTRL_X0Y1    fifo_inst/FIFO_i/clk_wiz/inst/clkf_buf/I
-Min Period  n/a     MMCME2_ADV/CLKFBOUT  n/a            1.249         10.000      8.751      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-Min Period  n/a     MMCME2_ADV/CLKFBIN   n/a            1.249         10.000      8.751      MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
-Max Period  n/a     MMCME2_ADV/CLKFBIN   n/a            100.000       10.000      90.000     MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
-Max Period  n/a     MMCME2_ADV/CLKFBOUT  n/a            213.360       10.000      203.360    MMCME2_ADV_X1Y0  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-
-
-
 --------------------------------------------------------------------------------------
 Path Group:  (none)
-From Clock:  clkfbout_FIFO_clk_wiz_1
+From Clock:  
   To Clock:  
 
-Max Delay             1 Endpoint
-Min Delay             1 Endpoint
+Max Delay           287 Endpoints
+Min Delay           287 Endpoints
 --------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
 Slack:                    inf
-  Source:                 fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-                            (clock source 'clkfbout_FIFO_clk_wiz_1'  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
+  Source:                 i_rst
+                            (input port)
+  Destination:            o_w5500_rst
+                            (output port)
   Path Group:             (none)
-  Path Type:              Max at Fast Process Corner
-  Data Path Delay:        1.375ns  (logic 0.029ns (2.109%)  route 1.346ns (97.891%))
-  Logic Levels:           1  (BUFG=1)
-  Clock Uncertainty:      0.148ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.050ns
-    Discrete Jitter          (DJ):    0.086ns
-    Phase Error              (PE):    0.099ns
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        6.252ns  (logic 3.541ns (56.635%)  route 2.711ns (43.365%))
+  Logic Levels:           2  (IBUF=1 OBUF=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-                         (clock clkfbout_FIFO_clk_wiz_1 fall edge)
-                                                      5.000     5.000 f  
-    W5                                                0.000     5.000 f  i_clk (IN)
-                         net (fo=0)                   0.000     5.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         0.414     5.414 f  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           0.480     5.894    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
+    V15                                               0.000     0.000 r  i_rst (IN)
+                         net (fo=0)                   0.000     0.000    i_rst
+    V15                  IBUF (Prop_ibuf_I_O)         0.951     0.951 r  i_rst_IBUF_inst/O
+                         net (fo=60, routed)          2.711     3.662    o_w5500_rst_OBUF
+    P17                  OBUF (Prop_obuf_I_O)         2.590     6.252 r  o_w5500_rst_OBUF_inst/O
+                         net (fo=0)                   0.000     6.252    o_w5500_rst
+    P17                                                               r  o_w5500_rst (OUT)
   -------------------------------------------------------------------    -------------------
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
-                                                     -3.142     2.752 f  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-                         net (fo=1, routed)           0.530     3.282    fifo_inst/FIFO_i/clk_wiz/inst/clkfbout_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.029     3.311 f  fifo_inst/FIFO_i/clk_wiz/inst/clkf_buf/O
-                         net (fo=1, routed)           0.817     4.127    fifo_inst/FIFO_i/clk_wiz/inst/clkfbout_buf_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV                                   f  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
+
+Slack:                    inf
+  Source:                 spi_ctrl/spi_clk_internal_reg/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_spi_clk
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        5.098ns  (logic 3.188ns (62.534%)  route 1.910ns (37.466%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y14          FDCE                         0.000     0.000 r  spi_ctrl/spi_clk_internal_reg/C
+    SLICE_X1Y14          FDCE (Prop_fdce_C_Q)         0.419     0.419 r  spi_ctrl/spi_clk_internal_reg/Q
+                         net (fo=6, routed)           1.910     2.329    o_spi_clk_OBUF
+    U19                  OBUF (Prop_obuf_I_O)         2.769     5.098 r  o_spi_clk_OBUF_inst/O
+                         net (fo=0)                   0.000     5.098    o_spi_clk
+    U19                                                               r  o_spi_clk (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/o_spi_mosi_reg/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_spi_mosi
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.972ns  (logic 3.063ns (61.610%)  route 1.909ns (38.390%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y13          FDCE                         0.000     0.000 r  spi_ctrl/o_spi_mosi_reg/C
+    SLICE_X1Y13          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  spi_ctrl/o_spi_mosi_reg/Q
+                         net (fo=1, routed)           1.909     2.365    o_spi_mosi_OBUF
+    P18                  OBUF (Prop_obuf_I_O)         2.607     4.972 r  o_spi_mosi_OBUF_inst/O
+                         net (fo=0)                   0.000     4.972    o_spi_mosi
+    P18                                                               r  o_spi_mosi (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_data_out_reg[7]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_encrypted_data[7]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.928ns  (logic 3.058ns (62.040%)  route 1.871ns (37.960%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y12          FDCE                         0.000     0.000 r  enc_engine/o_data_out_reg[7]/C
+    SLICE_X0Y12          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_data_out_reg[7]/Q
+                         net (fo=1, routed)           1.871     2.327    o_encrypted_data_OBUF[7]
+    W18                  OBUF (Prop_obuf_I_O)         2.602     4.928 r  o_encrypted_data_OBUF[7]_inst/O
+                         net (fo=0)                   0.000     4.928    o_encrypted_data[7]
+    W18                                                               r  o_encrypted_data[7] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_data_out_reg[5]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_encrypted_data[5]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.921ns  (logic 3.055ns (62.076%)  route 1.866ns (37.924%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y12          FDCE                         0.000     0.000 r  enc_engine/o_data_out_reg[5]/C
+    SLICE_X0Y12          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_data_out_reg[5]/Q
+                         net (fo=1, routed)           1.866     2.322    o_encrypted_data_OBUF[5]
+    T17                  OBUF (Prop_obuf_I_O)         2.599     4.921 r  o_encrypted_data_OBUF[5]_inst/O
+                         net (fo=0)                   0.000     4.921    o_encrypted_data[5]
+    T17                                                               r  o_encrypted_data[5] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/o_spi_cs_reg/C
+                            (rising edge-triggered cell FDPE)
+  Destination:            o_spi_cs
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.921ns  (logic 3.049ns (61.968%)  route 1.872ns (38.032%))
+  Logic Levels:           2  (FDPE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y13          FDPE                         0.000     0.000 r  spi_ctrl/o_spi_cs_reg/C
+    SLICE_X0Y13          FDPE (Prop_fdpe_C_Q)         0.456     0.456 r  spi_ctrl/o_spi_cs_reg/Q
+                         net (fo=1, routed)           1.872     2.328    o_spi_cs_OBUF
+    R18                  OBUF (Prop_obuf_I_O)         2.593     4.921 r  o_spi_cs_OBUF_inst/O
+                         net (fo=0)                   0.000     4.921    o_spi_cs
+    R18                                                               r  o_spi_cs (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_done_reg_lopt_replica/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_done
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.917ns  (logic 3.058ns (62.191%)  route 1.859ns (37.809%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X3Y13          FDCE                         0.000     0.000 r  enc_engine/o_done_reg_lopt_replica/C
+    SLICE_X3Y13          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_done_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.859     2.315    lopt
+    V19                  OBUF (Prop_obuf_I_O)         2.602     4.917 r  o_done_OBUF_inst/O
+                         net (fo=0)                   0.000     4.917    o_done
+    V19                                                               r  o_done (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_data_out_reg[4]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_encrypted_data[4]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.884ns  (logic 3.058ns (62.602%)  route 1.827ns (37.398%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y12          FDCE                         0.000     0.000 r  enc_engine/o_data_out_reg[4]/C
+    SLICE_X0Y12          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_data_out_reg[4]/Q
+                         net (fo=1, routed)           1.827     2.283    o_encrypted_data_OBUF[4]
+    T18                  OBUF (Prop_obuf_I_O)         2.602     4.884 r  o_encrypted_data_OBUF[4]_inst/O
+                         net (fo=0)                   0.000     4.884    o_encrypted_data[4]
+    T18                                                               r  o_encrypted_data[4] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_data_out_reg[6]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_encrypted_data[6]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.780ns  (logic 3.055ns (63.909%)  route 1.725ns (36.091%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y11          FDCE                         0.000     0.000 r  enc_engine/o_data_out_reg[6]/C
+    SLICE_X1Y11          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_data_out_reg[6]/Q
+                         net (fo=1, routed)           1.725     2.181    o_encrypted_data_OBUF[6]
+    W19                  OBUF (Prop_obuf_I_O)         2.599     4.780 r  o_encrypted_data_OBUF[6]_inst/O
+                         net (fo=0)                   0.000     4.780    o_encrypted_data[6]
+    W19                                                               r  o_encrypted_data[6] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/o_data_out_reg[1]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            o_encrypted_data[1]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        4.734ns  (logic 3.065ns (64.753%)  route 1.668ns (35.247%))
+  Logic Levels:           2  (FDCE=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y11          FDCE                         0.000     0.000 r  enc_engine/o_data_out_reg[1]/C
+    SLICE_X1Y11          FDCE (Prop_fdce_C_Q)         0.456     0.456 r  enc_engine/o_data_out_reg[1]/Q
+                         net (fo=1, routed)           1.668     2.124    o_encrypted_data_OBUF[1]
+    V16                  OBUF (Prop_obuf_I_O)         2.609     4.734 r  o_encrypted_data_OBUF[1]_inst/O
+                         net (fo=0)                   0.000     4.734    o_encrypted_data[1]
+    V16                                                               r  o_encrypted_data[1] (OUT)
   -------------------------------------------------------------------    -------------------
 
 
@@ -1559,33 +426,177 @@ Slack:                    inf
 Min Delay Paths
 --------------------------------------------------------------------------------------
 Slack:                    inf
-  Source:                 fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-                            (clock source 'clkfbout_FIFO_clk_wiz_1'  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
+  Source:                 spi_ctrl/rx_shift_reg_reg[2]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            spi_ctrl/o_data_out_reg[2]/D
   Path Group:             (none)
-  Path Type:              Min at Slow Process Corner
-  Data Path Delay:        3.129ns  (logic 0.091ns (2.908%)  route 3.038ns (97.092%))
-  Logic Levels:           1  (BUFG=1)
-  Clock Uncertainty:      0.148ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
-    Total System Jitter     (TSJ):    0.050ns
-    Discrete Jitter          (DJ):    0.086ns
-    Phase Error              (PE):    0.099ns
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.207ns  (logic 0.141ns (68.037%)  route 0.066ns (31.963%))
+  Logic Levels:           1  (FDCE=1)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-                         (clock clkfbout_FIFO_clk_wiz_1 rise edge)
-                                                      0.000     0.000 r  
-    W5                                                0.000     0.000 r  i_clk (IN)
-                         net (fo=0)                   0.000     0.000    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1
-    W5                   IBUF (Prop_ibuf_I_O)         1.388     1.388 r  fifo_inst/FIFO_i/clk_wiz/inst/clkin1_ibufg/O
-                         net (fo=1, routed)           1.162     2.550    fifo_inst/FIFO_i/clk_wiz/inst/clk_in1_FIFO_clk_wiz_1
+    SLICE_X9Y11          FDCE                         0.000     0.000 r  spi_ctrl/rx_shift_reg_reg[2]/C
+    SLICE_X9Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  spi_ctrl/rx_shift_reg_reg[2]/Q
+                         net (fo=2, routed)           0.066     0.207    spi_ctrl/rx_shift_reg[2]
+    SLICE_X8Y11          FDCE                                         r  spi_ctrl/o_data_out_reg[2]/D
   -------------------------------------------------------------------    -------------------
-    MMCME2_ADV_X1Y0      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
-                                                     -7.217    -4.668 r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBOUT
-                         net (fo=1, routed)           1.581    -3.086    fifo_inst/FIFO_i/clk_wiz/inst/clkfbout_FIFO_clk_wiz_1
-    BUFGCTRL_X0Y1        BUFG (Prop_bufg_I_O)         0.091    -2.995 r  fifo_inst/FIFO_i/clk_wiz/inst/clkf_buf/O
-                         net (fo=1, routed)           1.457    -1.538    fifo_inst/FIFO_i/clk_wiz/inst/clkfbout_buf_FIFO_clk_wiz_1
-    MMCME2_ADV_X1Y0      MMCME2_ADV                                   r  fifo_inst/FIFO_i/clk_wiz/inst/mmcm_adv_inst/CLKFBIN
+
+Slack:                    inf
+  Source:                 enc_engine/data_register_reg[6]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            enc_engine/o_data_out_reg[6]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.239ns  (logic 0.186ns (77.839%)  route 0.053ns (22.161%))
+  Logic Levels:           2  (FDCE=1 LUT2=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y11          FDCE                         0.000     0.000 r  enc_engine/data_register_reg[6]/C
+    SLICE_X0Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  enc_engine/data_register_reg[6]/Q
+                         net (fo=1, routed)           0.053     0.194    enc_engine/data_register[6]
+    SLICE_X1Y11          LUT2 (Prop_lut2_I1_O)        0.045     0.239 r  enc_engine/o_data_out[6]_i_1/O
+                         net (fo=1, routed)           0.000     0.239    enc_engine/o_data_out[6]_i_1_n_0
+    SLICE_X1Y11          FDCE                                         r  enc_engine/o_data_out_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/rx_shift_reg_reg[7]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            spi_ctrl/o_data_out_reg[7]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.243ns  (logic 0.128ns (52.590%)  route 0.115ns (47.410%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y11          FDCE                         0.000     0.000 r  spi_ctrl/rx_shift_reg_reg[7]/C
+    SLICE_X9Y11          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  spi_ctrl/rx_shift_reg_reg[7]/Q
+                         net (fo=1, routed)           0.115     0.243    spi_ctrl/rx_shift_reg[7]
+    SLICE_X8Y12          FDCE                                         r  spi_ctrl/o_data_out_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/FSM_onehot_r_current_state_reg[2]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            enc_engine/o_done_reg/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.245ns  (logic 0.141ns (57.489%)  route 0.104ns (42.511%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X4Y11          FDCE                         0.000     0.000 r  enc_engine/FSM_onehot_r_current_state_reg[2]/C
+    SLICE_X4Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  enc_engine/FSM_onehot_r_current_state_reg[2]/Q
+                         net (fo=12, routed)          0.104     0.245    enc_engine/Q[2]
+    SLICE_X4Y11          FDCE                                         r  enc_engine/o_done_reg/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/rx_shift_reg_reg[1]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            spi_ctrl/rx_shift_reg_reg[2]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.254ns  (logic 0.141ns (55.503%)  route 0.113ns (44.497%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y11          FDCE                         0.000     0.000 r  spi_ctrl/rx_shift_reg_reg[1]/C
+    SLICE_X9Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  spi_ctrl/rx_shift_reg_reg[1]/Q
+                         net (fo=2, routed)           0.113     0.254    spi_ctrl/rx_shift_reg[1]
+    SLICE_X9Y11          FDCE                                         r  spi_ctrl/rx_shift_reg_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/rx_shift_reg_reg[4]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            spi_ctrl/o_data_out_reg[4]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.262ns  (logic 0.141ns (53.843%)  route 0.121ns (46.157%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y11          FDCE                         0.000     0.000 r  spi_ctrl/rx_shift_reg_reg[4]/C
+    SLICE_X9Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  spi_ctrl/rx_shift_reg_reg[4]/Q
+                         net (fo=2, routed)           0.121     0.262    spi_ctrl/rx_shift_reg[4]
+    SLICE_X8Y11          FDCE                                         r  spi_ctrl/o_data_out_reg[4]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/rx_shift_reg_reg[5]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            spi_ctrl/rx_shift_reg_reg[6]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.263ns  (logic 0.128ns (48.625%)  route 0.135ns (51.375%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y11          FDCE                         0.000     0.000 r  spi_ctrl/rx_shift_reg_reg[5]/C
+    SLICE_X9Y11          FDCE (Prop_fdce_C_Q)         0.128     0.128 r  spi_ctrl/rx_shift_reg_reg[5]/Q
+                         net (fo=2, routed)           0.135     0.263    spi_ctrl/rx_shift_reg[5]
+    SLICE_X9Y11          FDCE                                         r  spi_ctrl/rx_shift_reg_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/o_data_out_reg[1]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            fifo_inst/ram_reg/DIADI[1]
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.270ns  (logic 0.164ns (60.728%)  route 0.106ns (39.272%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X8Y11          FDCE                         0.000     0.000 r  spi_ctrl/o_data_out_reg[1]/C
+    SLICE_X8Y11          FDCE (Prop_fdce_C_Q)         0.164     0.164 r  spi_ctrl/o_data_out_reg[1]/Q
+                         net (fo=1, routed)           0.106     0.270    fifo_inst/ram_reg_0[1]
+    RAMB18_X0Y4          RAMB18E1                                     r  fifo_inst/ram_reg/DIADI[1]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 spi_ctrl/o_data_out_reg[3]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            fifo_inst/ram_reg/DIADI[3]
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.270ns  (logic 0.164ns (60.728%)  route 0.106ns (39.272%))
+  Logic Levels:           1  (FDCE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X8Y11          FDCE                         0.000     0.000 r  spi_ctrl/o_data_out_reg[3]/C
+    SLICE_X8Y11          FDCE (Prop_fdce_C_Q)         0.164     0.164 r  spi_ctrl/o_data_out_reg[3]/Q
+                         net (fo=1, routed)           0.106     0.270    fifo_inst/ram_reg_0[3]
+    RAMB18_X0Y4          RAMB18E1                                     r  fifo_inst/ram_reg/DIADI[3]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 enc_engine/key_register_reg[0]/C
+                            (rising edge-triggered cell FDCE)
+  Destination:            enc_engine/o_data_out_reg[0]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.271ns  (logic 0.186ns (68.652%)  route 0.085ns (31.348%))
+  Logic Levels:           2  (FDCE=1 LUT2=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y11          FDCE                         0.000     0.000 r  enc_engine/key_register_reg[0]/C
+    SLICE_X0Y11          FDCE (Prop_fdce_C_Q)         0.141     0.141 r  enc_engine/key_register_reg[0]/Q
+                         net (fo=1, routed)           0.085     0.226    enc_engine/key_register[0]
+    SLICE_X1Y11          LUT2 (Prop_lut2_I0_O)        0.045     0.271 r  enc_engine/o_data_out[0]_i_1/O
+                         net (fo=1, routed)           0.000     0.271    enc_engine/o_data_out[0]_i_1_n_0
+    SLICE_X1Y11          FDCE                                         r  enc_engine/o_data_out_reg[0]/D
   -------------------------------------------------------------------    -------------------
 
 

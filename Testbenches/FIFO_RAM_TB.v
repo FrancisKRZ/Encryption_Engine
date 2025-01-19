@@ -1,109 +1,163 @@
 `timescale 1ns / 1ps
 
-module FIFO_RAM_TB;
+module FIFO_RAM_tb();
 
-    // Parameters for the FIFO
-    parameter WIDTH = 8;
-    parameter DEPTH = 256;
-
-    // Testbench signals
-    reg i_clk;
-    reg i_rst;
-    reg [WIDTH-1:0] i_wr_data;
-    reg i_wr_en;
-    reg i_rd_en;
-    wire [WIDTH-1:0] o_rd_data;
-    wire o_empty;
-    wire o_full;
-
-    // Instantiate the FIFO RAM module
+    // Parameters
+    localparam CLK_PERIOD = 10;
+    localparam WIDTH = 8;
+    localparam DEPTH = 16;
+    localparam ADDR_WIDTH = $clog2(DEPTH);
+    
+    // Test signals
+    reg                    tb_clk;
+    reg                    tb_rst_n;
+    reg  [WIDTH-1:0]      tb_wr_data;
+    reg                    tb_wr_en;
+    reg                    tb_rd_en;
+    wire [WIDTH-1:0]      tb_rd_data;
+    wire                   tb_empty;
+    wire                   tb_full;
+    wire [ADDR_WIDTH:0]   tb_count;
+    
+    integer error_count = 0;
+    
+    // DUT instantiation
     FIFO_RAM #(
         .WIDTH(WIDTH),
         .DEPTH(DEPTH)
-    ) uut (
-        .i_clk(i_clk),
-        .i_rst(i_rst),
-        .i_wr_data(i_wr_data),
-        .i_wr_en(i_wr_en),
-        .i_rd_en(i_rd_en),
-        .o_rd_data(o_rd_data),
-        .o_empty(o_empty),
-        .o_full(o_full)
+    ) DUT (
+        .i_clk(tb_clk),
+        .i_rst_n(tb_rst_n),
+        .i_wr_data(tb_wr_data),
+        .i_wr_en(tb_wr_en),
+        .i_rd_en(tb_rd_en),
+        .o_rd_data(tb_rd_data),
+        .o_empty(tb_empty),
+        .o_full(tb_full),
+        .o_count(tb_count)
     );
-
+    
     // Clock generation
-    always begin
-        #5 i_clk = ~i_clk; // 100 MHz clock
-    end
-
-    // Test procedure
     initial begin
-        // Initialize signals
-        i_clk = 0;
-        i_rst = 0;
-        i_wr_data = 8'h00;
-        i_wr_en = 0;
-        i_rd_en = 0;
-
-        // Reset FIFO
-        #10 i_rst = 1;
-        #10 i_rst = 0;
-
-        // Test case 1: Write to FIFO
-        $display("Test Case 1: Write to FIFO");
-        i_wr_data = 8'hAA;
-        i_wr_en = 1;
-        #10 i_wr_en = 0;
-
-        // Test case 2: Read from FIFO
-        $display("Test Case 2: Read from FIFO");
-        i_rd_en = 1;
-        #10 i_rd_en = 0;
-        if (o_rd_data !== 8'hAA) begin
-            $display("Error: Expected 8'hAA, got %h", o_rd_data);
+        tb_clk = 0;
+        forever #(CLK_PERIOD/2) tb_clk = ~tb_clk;
+    end
+    
+    // Test stimulus
+    initial begin
+        $display("Starting FIFO RAM Testbench...");
+        
+        // Initialize
+        tb_rst_n = 1;
+        tb_wr_en = 0;
+        tb_rd_en = 0;
+        tb_wr_data = 0;
+        
+        // Reset
+        #(CLK_PERIOD);
+        tb_rst_n = 0;
+        #(CLK_PERIOD*2);
+        tb_rst_n = 1;
+        #(CLK_PERIOD);
+        
+        // Test 1: Write until full
+        $display("Test 1: Writing data...");
+        write_sequence();
+        
+        // Test 2: Read until empty
+        $display("Test 2: Reading data...");
+        read_sequence();
+        
+        // Test 3: Alternating read/write
+        $display("Test 3: Alternating read/write...");
+        alternating_test();
+        
+        // Report results
+        $display("Tests completed with %0d errors", error_count);
+        $finish;
+    end
+    
+    // Write sequence
+    task write_sequence;
+        integer i;
+        begin
+            for (i = 0; i < DEPTH; i = i + 1) begin
+                @(negedge tb_clk);
+                tb_wr_data <= i;
+                tb_wr_en <= 1;
+                @(posedge tb_clk);
+                if (tb_count != i + 1) begin
+                    $display("Error: Count mismatch during write. Expected %0d, got %0d", i + 1, tb_count);
+                    error_count = error_count + 1;
+                end
+            end
+            @(negedge tb_clk);
+            tb_wr_en <= 0;
+            @(posedge tb_clk);
+            
+            if (!tb_full) begin
+                $display("Error: FIFO should be full");
+                error_count = error_count + 1;
+            end
         end
+    endtask
+    
+    // Read sequence
+    task read_sequence;
+        integer i;
+        begin
+            for (i = 0; i < DEPTH; i = i + 1) begin
+                @(negedge tb_clk);
+                tb_rd_en <= 1;
+                @(posedge tb_clk);
+                if (tb_rd_data !== i) begin
+                    $display("Error: Data mismatch. Expected %0h, got %0h", i, tb_rd_data);
+                    error_count = error_count + 1;
+                end
+            end
+            @(negedge tb_clk);
+            tb_rd_en <= 0;
+            @(posedge tb_clk);
+            
+            if (!tb_empty) begin
+                $display("Error: FIFO should be empty");
+                error_count = error_count + 1;
+            end
+        end
+    endtask
+    
+    // Alternating read/write test
+    task alternating_test;
+        integer i;
+        begin
+            for (i = 0; i < 8; i = i + 1) begin
+                // Write
+                @(negedge tb_clk);
+                tb_wr_data <= i;
+                tb_wr_en <= 1;
+                tb_rd_en <= 0;
+                @(posedge tb_clk);
+                @(negedge tb_clk);
+                tb_wr_en <= 0;
+                
+                // Read
+                @(negedge tb_clk);
+                tb_rd_en <= 1;
+                @(posedge tb_clk);
+                if (tb_rd_data !== i) begin
+                    $display("Error: Alternating test data mismatch. Expected %0h, got %0h", i, tb_rd_data);
+                    error_count = error_count + 1;
+                end
+                @(negedge tb_clk);
+                tb_rd_en <= 0;
+            end
+        end
+    endtask
 
-        // Test case 3: FIFO full condition
-        $display("Test Case 3: FIFO full condition");
-        // Fill FIFO to max depth (write DEPTH times)
-        i_wr_en = 1;
-        for (integer i = 0; i < DEPTH; i = i + 1) begin
-            i_wr_data = i;
-            #10;
-        end
-        if (!o_full) begin
-            $display("Error: FIFO should be full but o_full is %b", o_full);
-        end
-        i_wr_en = 0;
-
-        // Test case 4: FIFO read after full
-        $display("Test Case 4: FIFO read after full");
-        i_rd_en = 1;
-        #10 i_rd_en = 0;
-        if (o_rd_data !== 8'h00) begin
-            $display("Error: Expected 8'h00, got %h", o_rd_data);
-        end
-
-        // Test case 5: FIFO empty condition
-        $display("Test Case 5: FIFO empty condition");
-        // Empty FIFO by reading DEPTH times
-        for (integer i = 0; i < DEPTH; i = i + 1) begin
-            i_rd_en = 1;
-            #10 i_rd_en = 0;
-        end
-        if (!o_empty) begin
-            $display("Error: FIFO should be empty but o_empty is %b", o_empty);
-        end
-
-        // Test case 6: Attempt to read from empty FIFO
-        $display("Test Case 6: Read from empty FIFO");
-        i_rd_en = 1;
-        #10 i_rd_en = 0;
-        if (o_rd_data !== 8'h00) begin
-            $display("Error: Expected 8'h00, got %h", o_rd_data);
-        end
-
-        $stop; // End simulation
+    // Waveform dump
+    initial begin
+        $dumpfile("fifo_ram_tb.vcd");
+        $dumpvars(0, FIFO_RAM_tb);
     end
 
 endmodule

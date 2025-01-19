@@ -63,10 +63,8 @@ create_project -in_memory -part xc7a35tcpg236-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.cache/wt [current_project]
 set_property parent.project_path /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.xpr [current_project]
-set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part_repo_paths {/home/kryozek/.Xilinx/Vivado/2024.1/xhub/board_store/xilinx_board_store} [current_project]
@@ -76,17 +74,11 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/hdl/FIFO_wrapper.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v
   /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v
 }
-add_files /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/bd/FIFO/FIFO.bd
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_fifo_generator_0_0_3/FIFO_fifo_generator_0_0.xdc]
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_fifo_generator_0_0_3/FIFO_fifo_generator_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1_board.xdc]
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1.xdc]
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/ip/FIFO_clk_wiz_1/FIFO_clk_wiz_1_ooc.xdc]
-set_property used_in_implementation false [get_files -all /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.gen/sources_1/bd/FIFO/FIFO_ooc.xdc]
-
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -96,11 +88,9 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc /home/kryozek/Vivado/Vivado/2024.1/platforms/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files /home/kryozek/Vivado/Vivado/2024.1/platforms/Basys-3-Master.xdc]
+read_xdc /home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc
+set_property used_in_implementation false [get_files /home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc]
 
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Sat Jan 18 18:01:21 2025
+| Date         : Sun Jan 19 12:02:12 2025
 | Host         : kry-atp running 64-bit unknown
 | Command      : report_drc -file EncryptionEngineTop_drc_routed.rpt -pb EncryptionEngineTop_drc_routed.pb -rpx EncryptionEngineTop_drc_routed.rpx
 | Design       : EncryptionEngineTop
@@ -24,34 +24,51 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 3
-+-----------+------------------+----------------------------+------------+
-| Rule      | Severity         | Description                | Violations |
-+-----------+------------------+----------------------------+------------+
-| NSTD-1    | Critical Warning | Unspecified I/O Standard   | 1          |
-| UCIO-1    | Critical Warning | Unconstrained Logical Port | 1          |
-| RTSTAT-10 | Warning          | No routable loads          | 1          |
-+-----------+------------------+----------------------------+------------+
+             Violations found: 6
++-----------+------------------+--------------------------------------+------------+
+| Rule      | Severity         | Description                          | Violations |
++-----------+------------------+--------------------------------------+------------+
+| NSTD-1    | Critical Warning | Unspecified I/O Standard             | 1          |
+| UCIO-1    | Critical Warning | Unconstrained Logical Port           | 1          |
+| CFGBVS-7  | Warning          | CONFIG_VOLTAGE with Config Bank VCCO | 1          |
+| RBOR-1    | Warning          | RAMB output registers                | 1          |
+| REQP-1840 | Warning          | RAMB18 async control check           | 2          |
++-----------+------------------+--------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
 NSTD-1#1 Critical Warning
 Unspecified I/O Standard  
-13 out of 15 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: o_done, o_encrypted_data[7:0], o_spi_clk, o_spi_cs, o_spi_mosi
-o_w5500_rst.
+25 out of 25 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: i_clk, i_key[0], i_key[1], i_key[2], i_key[3], i_key[4], i_key[5],
+i_key[6], i_key[7], i_rst, i_spi_miso, i_start, o_done,
+o_encrypted_data[7:0], o_spi_clk (the first 15 of 18 listed).
 Related violations: <none>
 
 UCIO-1#1 Critical Warning
 Unconstrained Logical Port  
-13 out of 15 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: o_done, o_encrypted_data[7:0], o_spi_clk, o_spi_cs, o_spi_mosi
-o_w5500_rst.
+25 out of 25 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: i_clk, i_key[0], i_key[1], i_key[2], i_key[3], i_key[4], i_key[5],
+i_key[6], i_key[7], i_rst, i_spi_miso, i_start, o_done,
+o_encrypted_data[7:0], o_spi_clk (the first 15 of 18 listed).
 Related violations: <none>
 
-RTSTAT-10#1 Warning
-No routable loads  
-3 net(s) have no routable loads. The problem bus(es) and/or net(s) are fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i,
-fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb
-fifo_inst/FIFO_i/fifo_generator_0/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i.
+CFGBVS-7#1 Warning
+CONFIG_VOLTAGE with Config Bank VCCO  
+The CONFIG_MODE property of current_design specifies a configuration mode (SPIx4) that uses pins in bank 14.  I/O standards used in this bank have a voltage requirement of 1.80.  However, the CONFIG_VOLTAGE for current_design is set to 3.3. If you're using any config pins in this bank, ensure that your configuration voltage is compatible with the I/O standards in banks used by your configuration mode.  Refer to device configuration user guide for more information.    Pins used by config mode: D18 (IO_L1P_T0_D00_MOSI_14), D19 (IO_L1N_T0_D01_DIN_14), G18 (IO_L2P_T0_D02_14), F18 (IO_L2N_T0_D03_14), E18 (IO_L3P_T0_DQS_PUDC_B_14), and K19 (IO_L6P_T0_FCS_B_14)
+Related violations: <none>
+
+RBOR-1#1 Warning
+RAMB output registers  
+RAMB fifo_inst/ram_reg output DOB (8) is connected to asynchronous registers, if you use synchronous controls you will get better results both in area and delay (RAMB has synchronous registers built in).
+Related violations: <none>
+
+REQP-1840#1 Warning
+RAMB18 async control check  
+The RAMB18E1 fifo_inst/ram_reg has an input control pin fifo_inst/ram_reg/ENARDEN (net: fifo_inst/p_0_in_0[1]) which is driven by a register (spi_ctrl/o_done_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1840#2 Warning
+RAMB18 async control check  
+The RAMB18E1 fifo_inst/ram_reg has an input control pin fifo_inst/ram_reg/ENBWREN (net: fifo_inst/ram_reg_i_2_n_0) which is driven by a register (enc_engine/o_done_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 
