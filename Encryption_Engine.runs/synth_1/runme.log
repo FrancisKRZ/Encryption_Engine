@@ -7,12 +7,12 @@
   **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
   **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
   **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Sun Jan 19 11:58:47 2025
+  **** Start of session at: Sun Jan 19 13:37:50 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source EncryptionEngineTop.tcl -notrace
-create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1406.238 ; gain = 0.023 ; free physical = 3069 ; free virtual = 11433
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1352.762 ; gain = 6.961 ; free physical = 2521 ; free virtual = 11127
 Command: read_checkpoint -auto_incremental -incremental /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/utils_1/imports/synth_1/EncryptionEngine.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -26,9 +26,9 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 29083
+INFO: [Synth 8-7075] Helper process launched with PID 42259
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2110.055 ; gain = 412.746 ; free physical = 2011 ; free virtual = 10376
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2110.328 ; gain = 412.715 ; free physical = 1422 ; free virtual = 10031
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'EncryptionEngineTop' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:69]
 INFO: [Synth 8-6157] synthesizing module 'SPIController' [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v:42]
@@ -48,18 +48,18 @@ INFO: [Synth 8-6155] done synthesizing module 'EncryptionEngine' (0#1) [/home/kr
 INFO: [Synth 8-6155] done synthesizing module 'EncryptionEngineTop' (0#1) [/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v:69]
 WARNING: [Synth 8-7129] Port i_w5500_int in module EncryptionEngineTop is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2188.023 ; gain = 490.715 ; free physical = 1908 ; free virtual = 10274
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2188.297 ; gain = 490.684 ; free physical = 1346 ; free virtual = 9956
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2205.836 ; gain = 508.527 ; free physical = 1900 ; free virtual = 10265
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2206.109 ; gain = 508.496 ; free physical = 1343 ; free virtual = 9954
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2205.836 ; gain = 508.527 ; free physical = 1900 ; free virtual = 10265
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2206.109 ; gain = 508.496 ; free physical = 1343 ; free virtual = 9954
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2205.836 ; gain = 0.000 ; free physical = 1899 ; free virtual = 10264
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2206.109 ; gain = 0.000 ; free physical = 1343 ; free virtual = 9954
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -155,28 +155,28 @@ Resolution: If [get_<value>] was used to populate the object, check to make sure
 Finished Parsing XDC File [/home/kryozek/Shrine/FPGA/Encryption_Engine/Basys-3-Master.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2352.617 ; gain = 0.000 ; free physical = 1854 ; free virtual = 10221
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2352.891 ; gain = 0.000 ; free physical = 1272 ; free virtual = 9882
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2352.617 ; gain = 0.000 ; free physical = 1854 ; free virtual = 10221
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2352.891 ; gain = 0.000 ; free physical = 1272 ; free virtual = 9883
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2352.617 ; gain = 655.309 ; free physical = 1853 ; free virtual = 10220
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2352.891 ; gain = 655.277 ; free physical = 1280 ; free virtual = 9886
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1853 ; free virtual = 10220
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1280 ; free virtual = 9886
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1853 ; free virtual = 10220
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1280 ; free virtual = 9886
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'SPIController'
 INFO: [Synth 8-802] inferred FSM for state register 'r_current_state_reg' in module 'EncryptionEngine'
@@ -198,7 +198,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'r_current_state_reg' using encoding 'one-hot' in module 'EncryptionEngine'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1850 ; free virtual = 10218
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1277 ; free virtual = 9884
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -247,7 +247,7 @@ Start Cross Boundary and Area Optimization
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-7129] Port i_w5500_int in module EncryptionEngineTop is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1834 ; free virtual = 10207
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1280 ; free virtual = 9891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -268,13 +268,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1836 ; free virtual = 10208
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1141 ; free virtual = 9753
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1836 ; free virtual = 10208
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1141 ; free virtual = 9752
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -295,7 +295,7 @@ Start Technology Mapping
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-7052] The timing for the instance fifo_inst/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1836 ; free virtual = 10208
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1139 ; free virtual = 9751
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -313,37 +313,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1844 ; free virtual = 10216
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1159 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1844 ; free virtual = 10216
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1159 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1843 ; free virtual = 10216
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1158 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1843 ; free virtual = 10216
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1158 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1843 ; free virtual = 10216
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1159 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1843 ; free virtual = 10216
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1159 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -375,18 +375,18 @@ Report Cell Usage:
 |14    |OBUF     |    13|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.621 ; gain = 663.312 ; free physical = 1844 ; free virtual = 10216
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.895 ; gain = 663.281 ; free physical = 1159 ; free virtual = 9770
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2360.621 ; gain = 516.531 ; free physical = 1842 ; free virtual = 10215
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2360.629 ; gain = 663.312 ; free physical = 1842 ; free virtual = 10215
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2360.895 ; gain = 516.500 ; free physical = 1158 ; free virtual = 9769
+Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2360.902 ; gain = 663.281 ; free physical = 1158 ; free virtual = 9769
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2360.629 ; gain = 0.000 ; free physical = 1842 ; free virtual = 10214
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2360.902 ; gain = 0.000 ; free physical = 1157 ; free virtual = 9769
 INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2416.648 ; gain = 0.000 ; free physical = 2168 ; free virtual = 10541
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2416.922 ; gain = 0.000 ; free physical = 1546 ; free virtual = 10158
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
@@ -394,11 +394,11 @@ Synth Design complete | Checksum: 3cf595ec
 INFO: [Common 17-83] Releasing license: Synthesis
 34 Infos, 33 Warnings, 29 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:29 . Memory (MB): peak = 2416.648 ; gain = 1010.410 ; free physical = 2168 ; free virtual = 10540
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2114.271; main = 1737.769; forked = 496.814
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3386.676; main = 2416.652; forked = 1026.051
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:30 . Memory (MB): peak = 2416.922 ; gain = 1056.223 ; free physical = 1545 ; free virtual = 10156
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2208.640; main = 1767.735; forked = 560.184
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3450.332; main = 2416.926; forked = 1089.434
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2440.660 ; gain = 0.000 ; free physical = 2168 ; free virtual = 10540
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2440.934 ; gain = 0.000 ; free physical = 1545 ; free virtual = 10156
 INFO: [Common 17-1381] The checkpoint '/home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/synth_1/EncryptionEngineTop.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file EncryptionEngineTop_utilization_synth.rpt -pb EncryptionEngineTop_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Jan 19 11:59:25 2025...
+INFO: [Common 17-206] Exiting Vivado at Sun Jan 19 13:38:29 2025...

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Sun Jan 19 12:01:59 2025
+| Date         : Sun Jan 19 13:39:18 2025
 | Host         : kry-atp running 64-bit unknown
 | Command      : report_control_sets -verbose -file EncryptionEngineTop_control_sets_placed.rpt
 | Design       : EncryptionEngineTop
@@ -77,8 +77,8 @@ Table of Contents
 |  i_clk_IBUF_BUFG | spi_ctrl/o_spi_mosi_i_1_n_0           | o_w5500_rst_OBUF |                1 |              1 |         1.00 |
 |  i_clk_IBUF_BUFG | spi_ctrl/bit_counter[3]_i_1_n_0       | o_w5500_rst_OBUF |                1 |              4 |         4.00 |
 |  i_clk_IBUF_BUFG | spi_ctrl/FSM_onehot_state[3]_i_1_n_0  | o_w5500_rst_OBUF |                1 |              4 |         4.00 |
-|  i_clk_IBUF_BUFG |                                       | o_w5500_rst_OBUF |                1 |              5 |         5.00 |
 |  i_clk_IBUF_BUFG |                                       | enc_engine/i_rst |                2 |              5 |         2.50 |
+|  i_clk_IBUF_BUFG |                                       | o_w5500_rst_OBUF |                1 |              5 |         5.00 |
 |  i_clk_IBUF_BUFG | fifo_inst/rd_ptr[7]_i_1_n_0           | o_w5500_rst_OBUF |                2 |              8 |         4.00 |
 |  i_clk_IBUF_BUFG | fifo_inst/p_0_in_0[1]                 | o_w5500_rst_OBUF |                2 |              8 |         4.00 |
 |  i_clk_IBUF_BUFG | spi_ctrl/rx_shift_reg_0               | o_w5500_rst_OBUF |                2 |              8 |         4.00 |

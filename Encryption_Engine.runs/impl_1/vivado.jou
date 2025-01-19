@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Sun Jan 19 12:01:32 2025
-# Process ID: 29457
+# Start of session at: Sun Jan 19 13:38:51 2025
+# Process ID: 42497
 # Current directory: /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/impl_1
 # Command line: vivado -log EncryptionEngineTop.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source EncryptionEngineTop.tcl -notrace
 # Log file: /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.runs/impl_1/EncryptionEngineTop.vdi
@@ -13,12 +13,12 @@
 # Platform          :unknown
 # Operating System  :unknown
 # Processor Detail  :AMD Ryzen 3 PRO 4450U with Radeon Graphics
-# CPU Frequency     :1828.533 MHz
+# CPU Frequency     :1685.074 MHz
 # CPU Physical cores:4
 # CPU Logical cores :8
 # Host memory       :16098 MB
 # Swap memory       :4294 MB
 # Total Virtual     :20393 MB
-# Available Virtual :12372 MB
+# Available Virtual :11945 MB
 #-----------------------------------------------------------
 source EncryptionEngineTop.tcl -notrace
