@@ -1,24 +1,26 @@
 `timescale 1ns / 1ps
 
+/*  
+    Encryption Engine Finite State Machine
 
-module EncryptionEngine(
+    It will have three states: 
+        Idle: Waiting for Start Signal (i_start)
+        Encrypt: Encryption in Process, equivalent of Rd_En = 0 of a FIFO 
+        Done: Encryption Complete, equivalent of Rd_En = 1 of a FIFO
+*/
+
+module EncryptionEngine#(
+    parameter WIDTH = 8, 
+    parameter KEY_SIZE = 128
+    )(
     input i_clk,
     input i_rst,
-    input  [127:0] i_key,
-    input  [7:0] i_data_in,
+    input  [KEY_SIZE-1:0] i_key,
+    input  [WIDTH-1:0] i_data_in,
     input i_start,
-    output reg [7:0] o_data_out,
+    output reg [WIDTH-1:0] o_data_out,
     output reg o_done
     );
-
-    /*  
-        Encryption Engine Finite State Machine
-
-        It will have three states: 
-            Idle: Waiting for Start Signal (i_start)
-            Encrypt: Encryption in Process, equivalent of Rd_En = 0 of a FIFO 
-            Done: Encryption Complete, equivalent of Rd_En = 1 of a FIFO
-    */
 
 
     // Encryption Engine Finite State Machine

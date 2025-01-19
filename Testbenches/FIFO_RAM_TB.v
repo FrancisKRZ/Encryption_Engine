@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module tb_FIFO_RAM;
+module FIFO_RAM_TB;
 
     // Parameters for the FIFO
     parameter WIDTH = 8;

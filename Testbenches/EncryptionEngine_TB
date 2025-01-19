@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module EncryptionEngine_tb;
+module EncryptionEngine_TB;
 
     // Testbench signals
     reg          tb_clk;
