@@ -1,25 +1,8 @@
-+====================+===================+================================================+
-| Launch Setup Clock | Launch Hold Clock | Pin                                            |
-+====================+===================+================================================+
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[6]/D                       |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[8]/D                       |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[5]/D                       |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[4]/D                       |
-| sys_clk_pin        | sys_clk_pin       | FSM_sequential_current_state_reg[2]/D          |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[2]/D                       |
-| sys_clk_pin        | sys_clk_pin       | FSM_sequential_current_state_reg[0]/D          |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[6]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[0]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[4]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[5]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[3]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[2]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[7]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/o_rd_data_reg[1]/D                   |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/rd_ptr_reg[6]/D                      |
-| sys_clk_pin        | sys_clk_pin       | enc_engine/FSM_onehot_r_current_state_reg[0]/D |
-| sys_clk_pin        | sys_clk_pin       | enc_engine/FSM_onehot_r_current_state_reg[2]/D |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/rd_ptr_reg[7]/D                      |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/wr_ptr_reg[7]/D                      |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/wr_ptr_reg[6]/D                      |
-+--------------------+-------------------+------------------------------------------------+
++====================+===================+==========================+
+| Launch Setup Clock | Launch Hold Clock | Pin                      |
++====================+===================+==========================+
+| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[6]/D |
+| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[5]/D |
+| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[7]/D |
+| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[3]/D |
++--------------------+-------------------+--------------------------+

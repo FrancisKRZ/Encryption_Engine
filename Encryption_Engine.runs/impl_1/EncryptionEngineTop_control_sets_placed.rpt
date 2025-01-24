@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Sun Jan 19 17:06:55 2025
+| Date         : Tue Jan 21 11:46:03 2025
 | Host         : kry-atp running 64-bit unknown
 | Command      : report_control_sets -verbose -file EncryptionEngineTop_control_sets_placed.rpt
 | Design       : EncryptionEngineTop
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    17 |
-|    Minimum number of control sets                        |    17 |
+| Total control sets                                       |    13 |
+|    Minimum number of control sets                        |    13 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
 | Unused register locations in slices containing registers |    33 |
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    17 |
+| Total control sets |    13 |
 | >= 0 to < 4        |     2 |
 | >= 4 to < 6        |     3 |
 | >= 6 to < 8        |     0 |
-| >= 8 to < 10       |     6 |
+| >= 8 to < 10       |     7 |
 | >= 10 to < 12      |     0 |
-| >= 12 to < 14      |     4 |
+| >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     2 |
+| >= 16              |     1 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -59,37 +59,33 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |               0 |            0 |
-| No           | No                    | Yes                    |              12 |            8 |
+| No           | No                    | Yes                    |              12 |            4 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |              50 |           11 |
-| Yes          | Yes                   | No                     |              33 |           12 |
+| Yes          | No                    | Yes                    |              50 |           16 |
+| Yes          | Yes                   | No                     |              25 |            7 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+------------------+---------------------------------------+--------------------------------------------------+------------------+----------------+--------------+
-|   Clock Signal   |             Enable Signal             |                 Set/Reset Signal                 | Slice Load Count | Bel Load Count | Bels / Slice |
-+------------------+---------------------------------------+--------------------------------------------------+------------------+----------------+--------------+
-|  i_clk_IBUF_BUFG | spi_ctrl/o_spi_mosi_i_1_n_0           | o_w5500_rst_OBUF                                 |                1 |              1 |         1.00 |
-|  i_clk_IBUF_BUFG | spi_ctrl/o_spi_cs_i_1_n_0             | o_w5500_rst_OBUF                                 |                1 |              1 |         1.00 |
-|  i_clk_IBUF_BUFG |                                       | enc_engine/FSM_onehot_r_current_state[2]_i_2_n_0 |                3 |              4 |         1.33 |
-|  i_clk_IBUF_BUFG | spi_ctrl/FSM_onehot_state[3]_i_1_n_0  | o_w5500_rst_OBUF                                 |                1 |              4 |         4.00 |
-|  i_clk_IBUF_BUFG | spi_ctrl/bit_counter[3]_i_1_n_0       | o_w5500_rst_OBUF                                 |                1 |              4 |         4.00 |
-|  i_clk_IBUF_BUFG | spi_ctrl/FSM_onehot_state_reg_n_0_[3] | o_w5500_rst_OBUF                                 |                1 |              8 |         8.00 |
-|  i_clk_IBUF_BUFG | enc_engine/Q[1]                       | enc_engine/FSM_onehot_r_current_state[2]_i_2_n_0 |                2 |              8 |         4.00 |
-|  i_clk_IBUF_BUFG | spi_ctrl/rx_shift_reg_0               | o_w5500_rst_OBUF                                 |                1 |              8 |         8.00 |
-|  i_clk_IBUF_BUFG |                                       | o_w5500_rst_OBUF                                 |                5 |              8 |         1.60 |
-|  i_clk_IBUF_BUFG | fifo_inst/p_0_in_0[1]                 | o_w5500_rst_OBUF                                 |                3 |              8 |         2.67 |
-|  i_clk_IBUF_BUFG | fifo_inst/count[8]_i_1_n_0            | o_w5500_rst_OBUF                                 |                3 |              9 |         3.00 |
-|  i_clk_IBUF_BUFG | fifo_inst/ram_reg_64_127_0_2_i_1_n_0  |                                                  |                3 |             12 |         4.00 |
-|  i_clk_IBUF_BUFG | fifo_inst/ram_reg_192_255_0_2_i_1_n_0 |                                                  |                3 |             12 |         4.00 |
-|  i_clk_IBUF_BUFG | fifo_inst/ram_reg_0_63_0_2_i_1_n_0    |                                                  |                3 |             12 |         4.00 |
-|  i_clk_IBUF_BUFG | fifo_inst/ram_reg_128_191_0_2_i_1_n_0 |                                                  |                3 |             12 |         4.00 |
-|  i_clk_IBUF_BUFG | fifo_inst/E[0]                        | enc_engine/FSM_onehot_r_current_state[2]_i_2_n_0 |                3 |             16 |         5.33 |
-|  i_clk_IBUF_BUFG | fifo_inst/o_rd_data[7]_i_1_n_0        | o_w5500_rst_OBUF                                 |                6 |             16 |         2.67 |
-+------------------+---------------------------------------+--------------------------------------------------+------------------+----------------+--------------+
++------------------+------------------------------------------------+------------------+------------------+----------------+--------------+
+|   Clock Signal   |                  Enable Signal                 | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++------------------+------------------------------------------------+------------------+------------------+----------------+--------------+
+|  i_clk_IBUF_BUFG | spi_ctrl/o_spi_cs_i_1_n_0                      | o_w5500_rst_OBUF |                1 |              1 |         1.00 |
+|  i_clk_IBUF_BUFG | spi_ctrl/o_spi_mosi_i_1_n_0                    | o_w5500_rst_OBUF |                1 |              1 |         1.00 |
+|  i_clk_IBUF_BUFG |                                                | enc_engine/i_rst |                1 |              4 |         4.00 |
+|  i_clk_IBUF_BUFG | spi_ctrl/FSM_onehot_state[3]_i_1_n_0           | o_w5500_rst_OBUF |                1 |              4 |         4.00 |
+|  i_clk_IBUF_BUFG | spi_ctrl/bit_counter[3]_i_1_n_0                | o_w5500_rst_OBUF |                1 |              4 |         4.00 |
+|  i_clk_IBUF_BUFG |                                                | o_w5500_rst_OBUF |                3 |              8 |         2.67 |
+|  i_clk_IBUF_BUFG | spi_ctrl/FSM_onehot_state_reg_n_0_[3]          | o_w5500_rst_OBUF |                1 |              8 |         8.00 |
+|  i_clk_IBUF_BUFG | spi_ctrl/E[0]                                  | o_w5500_rst_OBUF |                2 |              8 |         4.00 |
+|  i_clk_IBUF_BUFG | spi_ctrl/rx_shift_reg_0                        | o_w5500_rst_OBUF |                1 |              8 |         8.00 |
+|  i_clk_IBUF_BUFG | enc_engine/Q[1]                                | enc_engine/i_rst |                4 |              8 |         2.00 |
+|  i_clk_IBUF_BUFG | fifo_inst/rd_ptr[7]_i_1_n_0                    | o_w5500_rst_OBUF |                2 |              8 |         4.00 |
+|  i_clk_IBUF_BUFG | fifo_inst/count[8]_i_1_n_0                     | o_w5500_rst_OBUF |                3 |              9 |         3.00 |
+|  i_clk_IBUF_BUFG | fifo_inst/FSM_onehot_r_current_state_reg[0][0] | enc_engine/i_rst |                6 |             16 |         2.67 |
++------------------+------------------------------------------------+------------------+------------------+----------------+--------------+
 
 

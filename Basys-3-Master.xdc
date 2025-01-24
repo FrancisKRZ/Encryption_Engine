@@ -5,7 +5,10 @@
 
 ## Clock signal
 set_property -dict { PACKAGE_PIN W5   IOSTANDARD LVCMOS33 } [get_ports i_clk]
-create_clock -add -name sys_clk_pin -period 2.222 -waveform {0 1.111} [get_ports i_clk]
+# create_clock -add -name sys_clk_pin -period 2.222 -waveform {0 1.111} [get_ports i_clk]
+
+# Diverging clock rate, this generates a WHS -0.168
+create_clock -add -name sys_clk_pin -period 3.333 -waveform {0 1.666} [get_ports i_clk]
 
 
 # Temp Key workaround

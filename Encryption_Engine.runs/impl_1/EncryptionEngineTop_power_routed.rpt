@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Sun Jan 19 17:07:14 2025
+| Date             : Tue Jan 21 11:46:23 2025
 | Host             : kry-atp running 64-bit unknown
 | Command          : report_power -file EncryptionEngineTop_power_routed.rpt -pb EncryptionEngineTop_power_summary_routed.pb -rpx EncryptionEngineTop_power_routed.rpx
 | Design           : EncryptionEngineTop
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.079        |
+| Total On-Chip Power (W)  | 0.077        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.008        |
+| Dynamic (W)              | 0.007        |
 | Device Static (W)        | 0.070        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -49,21 +49,21 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+--------------------------+-----------+----------+-----------+-----------------+
-| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
-+--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.005 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |      231 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |       78 |     20800 |            0.38 |
-|   LUT as Distributed RAM |    <0.001 |       48 |      9600 |            0.50 |
-|   CARRY4                 |    <0.001 |        2 |      8150 |            0.02 |
-|   Register               |    <0.001 |       96 |     41600 |            0.23 |
-|   Others                 |     0.000 |        4 |       --- |             --- |
-| Signals                  |     0.002 |      167 |       --- |             --- |
-| I/O                      |     0.001 |       25 |       106 |           23.58 |
-| Static Power             |     0.070 |          |           |                 |
-| Total                    |     0.079 |          |           |                 |
-+--------------------------+-----------+----------+-----------+-----------------+
++----------------+-----------+----------+-----------+-----------------+
+| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
++----------------+-----------+----------+-----------+-----------------+
+| Clocks         |     0.003 |        3 |       --- |             --- |
+| Slice Logic    |    <0.001 |      169 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       62 |     20800 |            0.30 |
+|   CARRY4       |    <0.001 |        2 |      8150 |            0.02 |
+|   Register     |    <0.001 |       87 |     41600 |            0.21 |
+|   Others       |     0.000 |        5 |       --- |             --- |
+| Signals        |    <0.001 |      138 |       --- |             --- |
+| Block RAM      |     0.002 |      0.5 |        50 |            1.00 |
+| I/O            |    <0.001 |       25 |       106 |           23.58 |
+| Static Power   |     0.070 |          |           |                 |
+| Total          |     0.077 |          |           |                 |
++----------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.017 |       0.008 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.016 |       0.006 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -128,7 +128,7 @@ Table of Contents
 +-------------+--------+-----------------+
 | Clock       | Domain | Constraint (ns) |
 +-------------+--------+-----------------+
-| sys_clk_pin | i_clk  |             2.2 |
+| sys_clk_pin | i_clk  |             3.3 |
 +-------------+--------+-----------------+
 
 
@@ -141,9 +141,8 @@ Table of Contents
 +---------------------+-----------+
 | Name                | Power (W) |
 +---------------------+-----------+
-| EncryptionEngineTop |     0.008 |
-|   enc_engine        |     0.001 |
-|   fifo_inst         |     0.004 |
+| EncryptionEngineTop |     0.007 |
+|   fifo_inst         |     0.003 |
 |   spi_ctrl          |     0.001 |
 +---------------------+-----------+
 

@@ -178,7 +178,7 @@ module EncryptionEngineTop #(
         .o_spi_clk(o_spi_clk),
         .o_spi_cs(o_spi_cs),
         // SPI clock divider
-        .i_clk_div(8'd4)    
+        .i_clk_div(8'd4)    // Clock Divider ---- check timing
     );
 
     // FIFO RAM Instance

@@ -84,6 +84,7 @@ module SPIController #(
 
         end else if (state != IDLE) begin
 
+            // Clock cycle generation for delays in Cross Clock Domain
             if (clk_counter >= i_clk_div - 1) begin
                 clk_counter <= 0;
                 spi_clk_internal <= ~spi_clk_internal;
