@@ -18,18 +18,18 @@ preplace portBus dout_0 -pg 1 -lvl 2 -x 280 -y -410 -defaultsOSRD
 preplace inst fifo_generator_0 -pg 1 -lvl 1 -x 70 -y -460 -defaultsOSRD
 preplace inst clk_wiz -pg 1 -lvl 1 -x 70 -y -140 -defaultsOSRD
 preplace netloc clk_wiz_clk_out1 1 0 2 -90 -210 220
-preplace netloc sys_clock_1 1 0 1 -130J -240n
-preplace netloc reset_1 1 0 1 -120J -260n
-preplace netloc fifo_generator_0_empty 1 0 2 -100 -280 260J
-preplace netloc fifo_generator_0_almost_empty 1 0 2 -100 -640 240J
-preplace netloc wr_en_0_1 1 0 1 NJ -490
 preplace netloc din_0_1 1 0 1 NJ -510
-preplace netloc fifo_generator_0_full 1 0 2 -110 -270 250J
+preplace netloc fifo_generator_0_almost_empty 1 0 2 -100 -640 240J
 preplace netloc fifo_generator_0_almost_full 1 0 2 -80 -290 220J
 preplace netloc fifo_generator_0_dout 1 0 2 -90 -630 230J
+preplace netloc fifo_generator_0_empty 1 0 2 -100 -280 260J
+preplace netloc fifo_generator_0_full 1 0 2 -110 -270 250J
 preplace netloc rd_en_0_1 1 0 1 NJ -390
+preplace netloc reset_1 1 0 1 -120J -260n
+preplace netloc sys_clock_1 1 0 1 -130J -240n
+preplace netloc wr_en_0_1 1 0 1 NJ -490
 levelinfo -pg 1 -150 70 280
-pagesize -pg 1 -db -bbox -sgen -270 -650 440 600
+pagesize -pg 1 -db -bbox -sgen -280 -650 440 600
 "
 }
 {

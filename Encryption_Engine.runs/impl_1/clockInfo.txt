@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2024.1
-| Date         : Tue Jan 21 11:45:55 2025
+| Date         : Sun Jan 26 10:47:07 2025
 | Host         : kry-atp
 | Design       : design_1
 | Device       : xc7a35t-cpg236-1--

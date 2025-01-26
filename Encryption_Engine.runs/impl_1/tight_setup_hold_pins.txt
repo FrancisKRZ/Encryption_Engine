@@ -1,8 +1,0 @@
-+====================+===================+==========================+
-| Launch Setup Clock | Launch Hold Clock | Pin                      |
-+====================+===================+==========================+
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[6]/D |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[5]/D |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[7]/D |
-| sys_clk_pin        | sys_clk_pin       | fifo_inst/count_reg[3]/D |
-+--------------------+-------------------+--------------------------+

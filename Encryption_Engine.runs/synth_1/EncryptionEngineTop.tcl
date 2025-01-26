@@ -56,6 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 2
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -73,9 +74,9 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngine.v
   /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/FIFO_RAM.v
-  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/SPIController.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/w5500_parameters.v
+  /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/W5500Driver.v
   /home/kryozek/Shrine/FPGA/Encryption_Engine/Encryption_Engine.srcs/sources_1/new/EncryptionEngineTop.v
 }
 OPTRACE "Adding files" END { }

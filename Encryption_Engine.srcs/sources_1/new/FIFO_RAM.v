@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 100ps
 
 // Future me -- No need to update or revise, it's working properly albeit R/W is to be done exclusive!
 
@@ -14,12 +14,12 @@
 // correctly it would need to handle all metastability issues. 
 // If crossing clock domains is required, use FIFO primitives directly from the vendor.
 module FIFO_RAM #(
-    parameter WIDTH = 8,
-    parameter DEPTH = 16,
+    parameter WIDTH = 48,
+    parameter DEPTH = 1024,
     parameter ADDR_WIDTH = $clog2(DEPTH)
 )(
     input  wire                  i_clk,
-    input  wire                  i_rst_n,
+    input  wire                  i_rst,
     input  wire [WIDTH-1:0]      i_wr_data,
     input  wire                  i_wr_en,
     input  wire                  i_rd_en,
@@ -45,7 +45,7 @@ module FIFO_RAM #(
     // Write pointer and data
     always @(posedge i_clk) begin
         
-        if (!i_rst_n) begin
+        if (i_rst) begin
             wr_ptr <= 0;
         end else if (i_wr_en && !o_full) begin
             ram[wr_ptr] <= i_wr_data;
@@ -56,7 +56,7 @@ module FIFO_RAM #(
     // Read pointer and data
     always @(posedge i_clk) begin
         
-        if (!i_rst_n) begin
+        if (i_rst) begin
             rd_ptr <= 0;
             o_rd_data <= 0;
         end else if (i_rd_en && !o_empty) begin
@@ -68,7 +68,7 @@ module FIFO_RAM #(
     // Count tracking
     always @(posedge i_clk) begin
 
-        if (!i_rst_n) begin
+        if (i_rst) begin
             count <= 0;
         end else begin
             case ({i_wr_en && !o_full, i_rd_en && !o_empty})
