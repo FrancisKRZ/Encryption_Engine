@@ -1,27 +1,7 @@
 `timescale 1ns / 100ps
 
 /*
-    This module may be a behemoth...
-
-    Firstly, we shall initialize the module itself as a subroutine,
-    its IP addresses, subnet, gateway and ports will be abstracted and/or simplified.
-    (I've yet to take the formal Computer Networks course (which I will this semester))
-
-    Then assert proper SPI communication, the SPI will send data to the W5500 as a FSM
-    {SEND_DATA, RECEIVE_DATA}, for which data is transmitted via the SPI MOSI and received
-    via the SPI MISO Pmod ports respectively.
-
-    The interrupt handle signal will be implemented as well for the i_w5500_int which will
-    have a connection with the SPI itself. This way it'll know when to read incoming
-    data from the W5500.
-    Once the interrupt is signaled in, the FSM will enter RECEIVE_DATA state in order
-    to fetch data from the W5500 module's Pmod pins.
-
-    It will then output data into our FIFO as indicated by o_data_ready and o_busy
-    will show when the driver is active involved in communication.
-
     NOTE: The following implementation is from: https://github.com/harout/concurrent-data-capture/tree/master
-
 */
 
 
