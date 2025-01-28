@@ -43,7 +43,7 @@ module W5500Driver #(
    `endif
  
 	input data_input_valid,
-	input[47:0] data_input,
+	input[47:0] data_input, // Data in from fpga device
 	
    // It is up to the client to request that the module
    // send the data in its TX buffer often enough that
