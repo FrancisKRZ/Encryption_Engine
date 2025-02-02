@@ -94,7 +94,11 @@ module EncryptionEngineTop #(
     reg data_out_valid = 1'b0;
     reg flush_requested = 1'b0;
     // Self used to wire data MISO to FIFO
-    wire [7:0] w_data_read;
+    reg [DATA_WIDTH-1:0] r_data_read;
+    // Not instantiated in source material
+    reg [DATA_WIDTH-1:0] data_read;
+    reg data_read_valid;
+
 
     `ifdef WIZNET5500_ACCEPT_INSTRUCTIONS
         reg [31:0] instruction_input = 32'd0;
@@ -130,14 +134,14 @@ module EncryptionEngineTop #(
 
 
     // Output from W5500's MISO
-    // assign w_data_read = data_read_valid ? data_read : 0'b0;
+    // assign r_data_read = data_read_valid ? data_read : 0'b0;
 
     /*        FIFO SECTION              */
 
     localparam ADDR_WIDTH = $clog2(DATA_WIDTH);
 
     // FIFO <Raw Frames> Instantiation and Parameters
-    reg [DATA_WIDTH-1:0] raw_w_fifo_data_out;         // Data output from FIFO
+    reg [DATA_WIDTH-1:0] raw_r_fifo_data_out;         // Data output from FIFO
     reg  raw_w_fifo_wr_en;                            // FIFO write enable
     reg  raw_r_fifo_rd_en;                            // FIFO read enable
     wire raw_w_fifo_empty, raw_w_fifo_full;           // FIFO status flags
@@ -152,12 +156,12 @@ module EncryptionEngineTop #(
         .i_rst(i_rst),
 
         // Inputs, raw data frames from eth_iface's MISO
-        .i_wr_data(w_data_read),                    // Reading raw ethernet frames
+        .i_wr_data(r_data_read),                    // Reading raw ethernet frames
         .i_wr_en(raw_w_fifo_wr_en),
         .i_rd_en(raw_r_fifo_rd_en),
 
         // Outputs
-        .o_rd_data(raw_w_fifo_data_out),
+        .o_rd_data(raw_r_fifo_data_out),
         .o_empty(raw_w_fifo_empty),
         .o_full(raw_w_fifo_full),
         .o_count(raw_w_fifo_count)
@@ -172,7 +176,7 @@ module EncryptionEngineTop #(
     reg  enc_r_fifo_rd_en;                            // FIFO read enable
     wire enc_w_fifo_empty, enc_w_fifo_full;           // FIFO status flags
     wire [ADDR_WIDTH:0] enc_w_fifo_count;
-    wire [DATA_WIDTH-1:0] enc_w_data_buffer;
+    reg [DATA_WIDTH-1:0] enc_r_data_buffer;
 
     FIFO_RAM #(
         .WIDTH(DATA_WIDTH),
@@ -184,7 +188,7 @@ module EncryptionEngineTop #(
         .i_rst(i_rst),
 
         // Inputs, raw data frames from eth_iface's MISO
-        .i_wr_data(enc_w_data_buffer),                    // Reading raw ethernet frames from enc_engine
+        .i_wr_data(enc_r_data_buffer),                    // Reading raw ethernet frames from enc_engine
         .i_wr_en(enc_w_fifo_wr_en),
         .i_rd_en(enc_r_fifo_rd_en),
 
@@ -200,8 +204,8 @@ module EncryptionEngineTop #(
     /*     ENCRYPTION ENGINE        */
 
     localparam ENCRYPTION_KEY = 32'h539;        // Internal Key <Until I figure out ethernet frames and use that instead>
-    wire [DATA_WIDTH-1:0] w_read_raw_fifo;
-    wire w_engine_read_from_fifo_enable;
+    reg [DATA_WIDTH-1:0] r_read_raw_fifo;
+    reg r_engine_read_from_fifo_enable;
     wire [DATA_WIDTH-1:0] w_encrypted_data;
 
     // Input comes from RAW FIFO output goes to ENC FIFO
@@ -214,8 +218,8 @@ module EncryptionEngineTop #(
         .i_rst(i_rst),
         // Engine signals
         .i_key(ENCRYPTION_KEY),                         // Encryption Key
-        .i_data_in(w_read_raw_fifo),                    // Reads from the Raw FIFO, Controlled by FSM
-        .i_start(w_engine_read_from_fifo_enable),       // In FSM when true; read
+        .i_data_in(r_read_raw_fifo),                    // Reads from the Raw FIFO, Controlled by FSM
+        .i_start(r_engine_read_from_fifo_enable),       // In FSM when true; read
         .o_data_out(w_encrypted_data)
 
     ); // Encryption Engine Module
@@ -260,15 +264,6 @@ module EncryptionEngineTop #(
             // Set Machine IDLE
             r_current_state <= IDLE;
             
-            // Raw FIFO
-            raw_r_fifo_rd_en <= 1'b0;
-            raw_w_fifo_wr_en <= 1'b0;
-            // Enc FIFO
-            enc_r_fifo_rd_en <= 1'b0;
-            enc_w_fifo_wr_en <= 1'b0;
-
-            w_engine_read_from_fifo_enable <= 1'b0;
-            
         end // end of reset
 
         // Initialize Machine next state
@@ -287,46 +282,62 @@ module EncryptionEngineTop #(
     // the ENC FIFO writes to data_to_ethernet <MOSI>, finally going into DONE state
     always (*) begin
 
-        r_next_state <= r_current_state;
+        /* NOTE: Using blocking assignments '=' 
+                instead of non-blocking '<=' 
+            in combinational block, we may change if stricter timing required */
+
+        r_next_state = r_current_state;
+
+        /* We've to insure the default state prior to IDLE  */
+        // All FIFO operations are disabled
+        raw_r_fifo_rd_en = 1'b0;
+        raw_w_fifo_wr_en = 1'b0;
+
+        enc_r_fifo_rd_en = 1'b0;
+        enc_w_fifo_wr_en = 1'b0;
+
+        r_engine_read_from_fifo_enable = 1'b0;
+
+        // Verify if handled automatically
+        data_out_valid = 1'b0;
+
 
         case (r_current_state)
 
             // IDLE: Determine next state
             IDLE: begin
 
-                // All FIFO operations are disabled
-                raw_r_fifo_rd_en <= 1'b0;
-                raw_w_fifo_wr_en <= 1'b0;
-
-                enc_r_fifo_rd_en <= 1'b0;
-                enc_w_fifo_wr_en <= 1'b0;
-
                 // Check for raw frames
-                if (!raw_w_fifo_empty) begin
+                if (data_read_valid) begin
                     
-                    r_next_state <= READ_RAW;
+                    r_next_state = WRITE_RAW;
                 
-                end else if (!raw_w_fifo_full) begin
+                end else if (!raw_w_fifo_empty) begin
 
-                    r_next_state <= WRITE_RAW;
+                    r_next_state = READ_RAW;
                 end
             
             end // end IDLE
 
+            /* HANDLING RAW FIFO */
+
             // WRITE: Write raw data to RAW FIFO
             WRITE_RAW: begin
 
-                if (data_out_valid) begin
+                if (raw_w_fifo_full) begin
 
-                    raw_w_fifo_wr_en <= 1'b1;
-                    w_data_read <= data_read;
+                    r_next_state = READ_RAW;
 
-                    // Content in RAW FIFO ---- Read into Enc Engine
-                    r_next_state <= READ_RAW;
-                end
+                end else begin
 
-                // Data from ETH not Valid
-                r_next_state <= IDLE;
+                    // Enable Raw FIFO write operation
+                    raw_w_fifo_wr_en = 1'b1;
+                    // Capture ETH data read (plugs to i_wr_data RAW FIFO from eth data_read)
+                    r_data_read = data_read;
+                    // Finished reading ---- Onto IDLE
+                    r_next_state = IDLE;
+
+                end 
 
             end // end WRITE_RAW
 
@@ -336,35 +347,33 @@ module EncryptionEngineTop #(
                 if (!raw_w_fifo_empty) begin
 
                     // Simply enable read, the data transfers in ENC_START
-                    // Enable encryption engine start
-                    w_engine_read_from_fifo_enable <= 1'b1;
 
-                    r_next_state <= ENC_START;
+                    // Enable raw FIFO read operation
+                    raw_r_fifo_rd_en = 1'b1;
+                    r_next_state = ENC_START;
+                
+                end else begin
+                    // If it's empty, go to IDLE
+                    r_next_state = IDLE;
                 end
-                // If it's empty, go to IDLE
-                r_next_state <= IDLE;
 
             end // end READ_RAW
 
+            /* RAW FIFO END */
+
+
+            /* HANDLING ENCRYPTION ENGINE */
 
             // START: Enables the read operation from RAW and writes ENC ENGINE
             ENC_START: begin
                 
-                if (!raw_w_fifo_empty) begin
+                // Enable encryption engine start
+                r_engine_read_from_fifo_enable = 1'b1;
+                // This'll work as our buffer into the enc engine
+                r_read_raw_fifo = raw_r_fifo_data_out;
 
-                    // Enable encryption engine start
-                    // w_engine_read_from_fifo_enable <= 1'b1;
-
-                    // This'll work as our buffer into the enc engine
-                    w_read_raw_fifo <= raw_w_fifo_data_out;
-
-                    // We've encrypted data ---- It will come out soon enough
-                    r_next_state <= ENC_DONE;
-
-                end
-    
-                // FIFO is empty :O
-                r_next_state <= IDLE;
+                // We've encrypted data ---- It will come out soon enough
+                r_next_state = ENC_DONE;
 
             end // end ENC_START
 
@@ -372,27 +381,35 @@ module EncryptionEngineTop #(
             ENC_DONE: begin
 
                 // Encryption engine start disable
-                w_engine_read_from_fifo_enable <= 1'b0;
+                r_engine_read_from_fifo_enable = 1'b0;
 
-                r_next_state <= WRITE_ENC;
+                r_next_state = WRITE_ENC;
 
             end
 
+            /* ENCRYPTION ENGINE END */
+
+
+            /* HANDLING ENCRYPTED FIFO */
 
             // WRITE: Writes the enc data into the ENC FIFO
             WRITE_ENC: begin
 
                 if (!enc_w_fifo_full) begin
+
                     // Enable write operations to ENC FIFO
-                    enc_w_fifo_wr_en <= 1'b1;
+                    enc_w_fifo_wr_en = 1'b1;
+                    // Let's write the encrypted data into enc_fifo i_wr_data
+                    enc_r_data_buffer = w_encrypted_data;
 
-                    // Let's put the encrypted data in a buffer
-                    enc_w_data_buffer <= w_encrypted_data;
+                    // Now that the FIFO has data go to READ state
+                    r_next_state = READ_ENC;
 
-                end 
+                end else begin 
+                    // If the FIFO is still somehow full, then READ ENC is not functioning, go to IDLE
+                    r_next_state = IDLE;
+                end
 
-                // Now that the FIFO has data, let's send it out to ethernet
-                r_next_state <= READ_ENC;
 
             end // end WRITE_ENC
 
@@ -404,34 +421,47 @@ module EncryptionEngineTop #(
                 if (!enc_w_fifo_empty) begin
 
                     // FIFO enable read
-                    enc_r_fifo_rd_en <= 1'b1;
+                    enc_r_fifo_rd_en = 1'b1;
 
                     // Ethernet data valid
-                    data_out_valid <= 1'b1;
-                    data_to_ethernet <= enc_w_fifo_data_out;
+                    data_out_valid = 1'b1;
+                    // Read out enc fifo 
+                    data_to_ethernet = enc_w_fifo_data_out;
 
                     // We've completed an entire cycle :D
-                    r_next_state <= DONE;
+                    r_next_state = DONE;
+                
 
+                end else begin
+                    // If it's somehow empty, then go to IDLE
+                    r_next_state = IDLE;
                 end
 
             end
 
+            /* ENCRYPTED FIFO END */
+
+
+            /* FINISH HANDLING FULL CYCLE */
+
             // DONE: Cycle completed sucessfully ---- Back to IDLE
             DONE: begin
-
-                // Let's disable unused resources
-                data_out_valid <= 1'b0;
+                
+                // Let's reset some signals
+                data_out_valid   = 1'b0;
+                enc_r_fifo_rd_en = 1'b0;
+                enc_w_fifo_wr_en = 1'b0;
 
                 // Back to IDLE
-                r_next_state <= IDLE;
+                r_next_state = IDLE;
 
             end
 
+            /* FULL CYCLE COMPLETE */
 
             // Default State
             default: begin
-                r_next_state <= IDLE;
+                r_next_state = IDLE;
             end
 
 
@@ -442,26 +472,3 @@ module EncryptionEngineTop #(
 
 
 endmodule
-
-
-
-
-
-/*  If implemented FIFO RAM fails timing requirements, or aditional Error-Correction, ECC, encoding
-    is required, we may instantiate IP Block generated FIFO
-*/
-
-    // FIFO IP instance
-    // 8-bit width 256-bit depth 
-    // FIFO_wrapper fifo_inst (
-    //     .almost_empty_0(),      // Optional, may be used during Encryption Throttle
-    //     .almost_full_0(),       // Optional, may be used during Encryption Throttle
-    //     .din_0(din_0),          // Data input to FIFO
-    //     .dout_0(dout_0),        // Data output from FIFO
-    //     .empty_0(empty_0),      // FIFO empty flag
-    //     .full_0(full_0),        // FIFO full flag
-    //     .rd_en_0(rd_en_0),      // Read enable signal for FIFO
-    //     .reset(i_rst),          // Reset signal for FIFO
-    //     .sys_clock(i_clk),      // Clock signal for FIFO
-    //     .wr_en_0(wr_en_0)       // Write enable signal for FIFO
-    // );
