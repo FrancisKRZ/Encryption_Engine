@@ -69,7 +69,7 @@ ________________________________________________________________________________
 module EncryptionEngineTop #(
     parameter KEY_SIZE = 32,  // 32-bit key for encryption
     parameter DATA_WIDTH = 8, // Same size as W5500's data_read
-    parameter DEPTH = 1024    // Used for FIFOs
+    parameter DEPTH = 48    // Used for FIFOs <48-bit buffer>
 )(
     input i_clk,                                // System clock
     input i_rst,                                // Reset signal
@@ -233,7 +233,7 @@ module EncryptionEngineTop #(
 
     // Machine Idle , Reset or Done
     localparam IDLE         = 4'b0000;
-    localparam RESET        = 4'b0111;
+    localparam ERROR        = 4'b0111;  // Will be used for handling lost bits errors, eventually
     localparam DONE         = 4'b1000;
 
     // Read/Write into Raw FIFO
@@ -402,12 +402,12 @@ module EncryptionEngineTop #(
                     // Let's write the encrypted data into enc_fifo i_wr_data
                     enc_r_data_buffer = w_encrypted_data;
 
-                    // Now that the FIFO has data go to READ state
-                    r_next_state = READ_ENC;
+                    // Now that the FIFO has data keep WRITING into ENC FIFO
+                    r_next_state = WRITE_ENC;
 
                 end else begin 
-                    // If the FIFO is still somehow full, then READ ENC is not functioning, go to IDLE
-                    r_next_state = IDLE;
+                    // If the FIFO is full, then the RAW FIFO & ENC states were sucessful
+                    r_next_state = READ_ENC;
                 end
 
 
@@ -428,13 +428,15 @@ module EncryptionEngineTop #(
                     // Read out enc fifo 
                     data_to_ethernet = enc_w_fifo_data_out;
 
-                    // We've completed an entire cycle :D
-                    r_next_state = DONE;
+                    // Keep reading the entire buffer
+                    r_next_state = READ_ENC;
                 
 
+                // Now it must be empty, an entire cycle was completed :)
                 end else begin
-                    // If it's somehow empty, then go to IDLE
-                    r_next_state = IDLE;
+
+                    r_next_state = DONE;
+                
                 end
 
             end
