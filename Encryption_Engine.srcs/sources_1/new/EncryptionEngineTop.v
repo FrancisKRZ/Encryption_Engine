@@ -301,6 +301,8 @@ module EncryptionEngineTop #(
         // Verify if handled automatically
         data_out_valid = 1'b0;
 
+        // Ethernet Flush
+        flush_requested = 1'b0;
 
         case (r_current_state)
 
@@ -427,7 +429,8 @@ module EncryptionEngineTop #(
                     data_out_valid = 1'b1;
                     // Read out enc fifo 
                     data_to_ethernet = enc_w_fifo_data_out;
-
+                    // Request flush / send data to eth
+                    flush_requested = 1'b1;
                     // Keep reading the entire buffer
                     r_next_state = READ_ENC;
                 
